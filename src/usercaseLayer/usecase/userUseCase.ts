@@ -3,27 +3,30 @@ import { IUserRepository } from "../interface/repository/IuserRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import IHashpassword from "../interface/services/Ihashpassword";
 import Ijwt from "../interface/services/Ijwt";
+import INodemailer from "../interface/services/Inodemailer";
 import { createUser } from "./user/createUser";
+import { emailVeification } from "./user/emailVerification";
+import { verifyEmail } from "./user/sendEmail";
 
 
 export class UserUseCase {
   private readonly userRepository: IUserRepository;
   private readonly bcrypt: IHashpassword;
   private readonly jwt: Ijwt;
-//   private readonly nodemailer: INodemailerRepository;
+  private readonly nodemailer: INodemailer;
   private readonly requestValidator: IRequestValidator;
 
   constructor(
     userRepository: IUserRepository,
     bcrypt: IHashpassword,
     jwt: Ijwt,
-    // nodemailer: INodemailerRepository,
+    nodemailer: INodemailer,
     requestValidator: IRequestValidator
   ) {
     this.userRepository = userRepository;
     this.bcrypt = bcrypt;
     this.jwt = jwt;
-    // this.nodemailer = nodemailer;
+    this.nodemailer = nodemailer;
     this.requestValidator = requestValidator;
   }
 
@@ -49,6 +52,18 @@ export class UserUseCase {
       password
     );
   }
+
+
+  //to send OTP to verify the user's detail
+  async verifyEmail({ email, name }: { email: string; name: string }) {
+    return verifyEmail(this.requestValidator, this.nodemailer, email, name);
+  }
+
+  //to check if the user entered OTP is correct or not
+  async emailVeification({ otp, email }: { otp: string; email: string }) {
+    return emailVeification(this.requestValidator, this.nodemailer, otp, email);
+  }
+  
 
 
 }

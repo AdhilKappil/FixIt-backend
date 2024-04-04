@@ -12,5 +12,13 @@ router.post(
       userAdapter.createUser(req, res, next)
   );
 
+//routes for email verification
+router.post("/sendEmail", (req: Request, res: Response, next: NextFunction) =>
+  userAdapter.sendEmail(req, res, next)
+);
+router.post("/verifyEmail", (req: Request, res: Response, next: NextFunction) =>
+  userAdapter.emailVerification(req, res, next)
+);  
+
   
 export default router  

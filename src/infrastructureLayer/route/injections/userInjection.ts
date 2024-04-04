@@ -4,6 +4,7 @@ import UserModel from "../../database/model/userModel";
 import { UserRepository } from "../../database/repository/userRepository";
 import Encrypt from "../../services/bcrypt";
 import JwtPassword from "../../services/jwt";
+import Nodemailer from "../../services/nodemailer";
 import RequestValidator from "../../services/validateRepository";
 
 
@@ -11,14 +12,14 @@ import RequestValidator from "../../services/validateRepository";
 const userRepository = new UserRepository(UserModel);
 const bcrypt = new Encrypt();
 const jwt = new JwtPassword();
-// const nodemailer = new Nodemailer();
+const nodemailer = new Nodemailer();
 // const publisher = new Publisher();
 const requestValidator = new RequestValidator();
 const userusecase = new UserUseCase(
   userRepository,
   bcrypt,
   jwt,  
-//   nodemailer,
+  nodemailer,
 //   publisher,
   requestValidator
 );

@@ -22,4 +22,33 @@ export class UserAdapter {
     }
   }
 
+
+  
+  //to send the email or verification
+  async sendEmail(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.userusecase.verifyEmail(req.body);
+      res.status(user.status).json({
+        success: user.success,
+        message: user.message,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  //to verify whether the otp send through the email is same as that of the user
+  async emailVerification(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.userusecase.emailVeification(req.body);
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
 }
