@@ -6,6 +6,7 @@ import Ijwt from "../interface/services/Ijwt";
 import INodemailer from "../interface/services/Inodemailer";
 import { createUser } from "./user/createUser";
 import { emailVeification } from "./user/emailVerification";
+import { loginUser } from "./user/loginUser";
 import { verifyEmail } from "./user/sendEmail";
 
 
@@ -53,6 +54,17 @@ export class UserUseCase {
     );
   }
 
+// user can login here
+  async loginUser({ email, password }: { email: string; password: string }) {
+    return loginUser(
+      this.requestValidator,
+      this.userRepository,
+      this.bcrypt,
+      this.jwt,
+      email,
+      password
+    );
+  }
 
   //to send OTP to verify the user's detail
   async verifyEmail({ email, name }: { email: string; name: string }) {
@@ -64,6 +76,5 @@ export class UserUseCase {
     return emailVeification(this.requestValidator, this.nodemailer, otp, email);
   }
   
-
 
 }

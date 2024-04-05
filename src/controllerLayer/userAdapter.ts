@@ -23,6 +23,22 @@ export class UserAdapter {
   }
 
 
+  //to login user
+  async loginUser(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.userusecase.loginUser(req.body);
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+          message: user.message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   
   //to send the email or verification
   async sendEmail(req: Req, res: Res, next: Next) {

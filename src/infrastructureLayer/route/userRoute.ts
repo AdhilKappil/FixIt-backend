@@ -12,7 +12,14 @@ router.post(
       userAdapter.createUser(req, res, next)
   );
 
-//routes for email verification
+  // roure for user login
+router.post(
+  "/login",
+  (req: Request, res: Response, next: NextFunction) =>
+    userAdapter.loginUser(req, res, next)
+);
+
+//routes for email verification and send otp to email
 router.post("/sendEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.sendEmail(req, res, next)
 );
