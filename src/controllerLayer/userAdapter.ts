@@ -30,7 +30,7 @@ export class UserAdapter {
       user &&
         res.status(user.status).json({
           success: user.success,
-          data: user.data,
+          // data: user.data,
           message: user.message,
         });
     } catch (err) {

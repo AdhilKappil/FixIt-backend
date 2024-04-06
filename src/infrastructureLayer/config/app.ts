@@ -1,12 +1,14 @@
-require("dotenv").config()
+import dotenv from 'dotenv';
+
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import morgan from 'morgan'
 import userRouter from '../route/userRoute'
+import adminRouter from '../route/adminRoute';
 
-//Routes
 
+dotenv.config();
 export const app = express()
 
 app.use(cors({ origin: process.env.CLIENT_SERVER, credentials: true }));
@@ -17,3 +19,4 @@ app.use(morgan('dev'))
 
 // Routes
 app.use("/api/user", userRouter);
+app.use("/api/admin", adminRouter);
