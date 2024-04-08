@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import INodemailer from "../../usercaseLayer/interface/services/Inodemailer";
 
 class Nodemailer implements INodemailer {
-  private otps: Map<string, { otp: string; timestamp: number }> = new Map();
+  private otps: Map<string, string> = new Map();
 
   //to generate otp
   generateOTP(): string {
@@ -33,7 +33,9 @@ class Nodemailer implements INodemailer {
       });
 
       const otp = this.generateOTP();
-      this.otps.set(email, { otp, timestamp: Date.now() }); // Storing OTP with timestamp
+      this.otps.set(email, otp);
+      console.log(this.otps);
+      
 
       const mailOptions = {
         from: "testingjobee007@gmail.com",
@@ -52,7 +54,7 @@ class Nodemailer implements INodemailer {
       };
 
       await transporter.sendMail(mailOptions);
-      return "Email sent";
+      return "Hey please check your email";
     } catch (error) {
       throw new Error(
         `Unable to send email verification email to ${email}: ${error}`
@@ -62,35 +64,13 @@ class Nodemailer implements INodemailer {
 
   //to verfiy the email to check if it is crct or not
   async verifyEmail(enteredOTP: string, email: string): Promise<boolean> {
-    console.log('helllo');
-    
     try {
-      const storedOTP = this.otps.get(email);
-      console.log(storedOTP);
-      
-      if (!storedOTP) {
-        return false; // OTP not found
-      }
-
-      const { otp, timestamp } = storedOTP;
-      const currentTime = Date.now();
-      const otpExpirationTime = 30 * 1000;
-      console.log(currentTime - timestamp, +' '+ otpExpirationTime);
-       // 30 seconds in milliseconds
-      if (currentTime - timestamp > otpExpirationTime) {
-        // OTP has expired
-        console.log('otp expired');
-        
-        this.otps.delete(email);
-        throw new Error("OTP expired"); // Throw an error indicating OTP expiration
-      }
-
-      if (otp === enteredOTP) {
-        
+      const expectedOTP = this.otps.get(email);
+      if (expectedOTP === enteredOTP) {
         this.otps.delete(email);
         return true;
       } else {
-        return false;
+        return false; 
       }
     } catch (error) {
       throw new Error("Wrong otp");

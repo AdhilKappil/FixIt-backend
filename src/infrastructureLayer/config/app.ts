@@ -6,6 +6,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import userRouter from '../route/userRoute'
 import adminRouter from '../route/adminRoute';
+import errorHandler from '../../usercaseLayer/handler/errorHandler';
 
 
 dotenv.config();
@@ -20,3 +21,6 @@ app.use(morgan('dev'))
 // Routes
 app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
+
+// error handler middleware
+app.use(errorHandler)

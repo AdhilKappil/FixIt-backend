@@ -8,15 +8,15 @@ export class AdminAdapter {
     this.adminusecase = adminusecase; // using dependency injection to call the adminusecase
   }
 
-
   //to login admin
   async loginAdmin(req: Req, res: Res, next: Next) {
     try {
       const user = await this.adminusecase.loginAdmin(req.body);
+
       user &&
         res.status(user.status).json({
           success: user.success,
-          // data: user.data,
+          data: user.data,
           message: user.message,
         });
     } catch (err) {
@@ -24,5 +24,36 @@ export class AdminAdapter {
     }
   }
 
+  async getUsers(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.adminusecase.findAllUser();
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
 
+  // @desc    Block /Unblock the user
+  //route     PATCH /api/admin/users/unblock-block
+  //@access   Private
+  async blockUnblockUser(req: Req, res: Res, next: Next) {
+    try {
+      const _id = req.query.id as string; 
+      const user = await this.adminusecase.blockUnblockUser(_id);
+      console.log(user);
+      
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+          message: user.message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
 }

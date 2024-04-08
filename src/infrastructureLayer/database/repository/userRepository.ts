@@ -1,6 +1,7 @@
 import { IUser } from "../../../domainLayer/user";
 import { IUserRepository } from "../../../usercaseLayer/interface/repository/IuserRepository";
 import UserModel from "../model/userModel";
+import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";
 import { findUser } from "./user/findUser";
 
@@ -17,6 +18,11 @@ export class UserRepository implements IUserRepository {
    // Check if a user exists using email
    async findUser(email: string): Promise<IUser | null> {
     return findUser(email, this.usersModel);
+  }
+
+  // admin can block user
+  async blockUser(_id: string): Promise<string | null> {
+    return blockUser(_id,this.usersModel)
   }
 
 }

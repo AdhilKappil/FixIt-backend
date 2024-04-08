@@ -1,42 +1,33 @@
-
 import ErrorResponse from "../../handler/errorResponse";
 import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
-import INodemailer from "../../interface/services/Inodemailer";
 import { Response } from "../../interface/services/Iresponse";
 
 
-export const verifyEmail = async (
+export const blockUnblockUser = async (
   requestValidator: IRequestValidator,
   userRepository: IUserRepository,
-  nodemailer: INodemailer,
-  email: string,
-  name: string
+  _id : string
 ): Promise<Response> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { email, name },
-      ["email", "name"]
+      {_id },
+      ["_id"]
     );
 
     if (!validation.success) {
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-    const user = await userRepository.findUser(email);
-    if(user){
-      throw ErrorResponse.badRequest("User already exist");
+      const block = await userRepository.blockUser(_id);
+      return {
+        status: 200,
+        success: true,
+        message: `Successfully updated`,
+      };
+    }catch(err){
+        throw err;
     }
-
-    const verify = await nodemailer.sendEmailVerification(email, name);
-
-    return {
-      status: 200,
-      success: true,
-      message: verify,
-    };
-  } catch (err) {
-    throw err;
-  }
+ 
 };

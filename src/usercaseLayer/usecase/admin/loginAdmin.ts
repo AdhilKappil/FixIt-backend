@@ -4,7 +4,7 @@ import { IAdminRepository } from "../../interface/repository/IadminRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { Response } from "../../interface/services/Iresponse";
+import { AdminData, AdminResponse } from "../../interface/services/Iresponse";
 
 export const loginAdmin = async (
   requestValidator: IRequestValidator,
@@ -13,7 +13,7 @@ export const loginAdmin = async (
   jwt: Ijwt,
   email: string,
   password: string
-): Promise<Response> => {
+): Promise<AdminResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -30,13 +30,23 @@ export const loginAdmin = async (
     if (admin && admin._id) {
       const match: boolean = await bcrypt.compare(password, admin.password);
       if (match) {
-        const token = jwt.createJWT(admin._id, admin.email, "admin", admin.name);
+        const token = jwt.createJWT(
+          admin._id,
+          admin.email,
+          "admin",
+          admin.name
+        );
+
+        const responseData: AdminData = {
+          _id: admin._id,
+          name: admin.name
+        };
 
         return {
           status: 200,
           success: true,
-        //   data: token,
-          message: "Sucessfully logged In",
+          data: responseData,
+          message: `Login successful. Welcome ${admin.name}`,
         };
       }
       throw ErrorResponse.badRequest("Wrong password or email");

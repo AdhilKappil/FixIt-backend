@@ -16,6 +16,7 @@ export class UserAdapter {
         res.status(newUser.status).json({
           success: newUser.success,
           message: newUser.message,
+          user:newUser.data
         });
     } catch (err) {
       next(err);
@@ -30,7 +31,7 @@ export class UserAdapter {
       user &&
         res.status(user.status).json({
           success: user.success,
-          // data: user.data,
+          data: user.data,
           message: user.message,
         });
     } catch (err) {
@@ -60,7 +61,8 @@ export class UserAdapter {
       user &&
         res.status(user.status).json({
           success: user.success,
-          data: user.data,
+          // data: user.data,
+          message:user.message
         });
     } catch (err) {
       next(err);

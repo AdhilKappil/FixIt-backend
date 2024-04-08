@@ -68,7 +68,7 @@ export class UserUseCase {
 
   //to send OTP to verify the user's detail
   async verifyEmail({ email, name }: { email: string; name: string }) {
-    return verifyEmail(this.requestValidator, this.nodemailer, email, name);
+    return verifyEmail(this.requestValidator,this.userRepository, this.nodemailer, email, name);
   }
 
   //to check if the user entered OTP is correct or not

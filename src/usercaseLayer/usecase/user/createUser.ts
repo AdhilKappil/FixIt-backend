@@ -38,7 +38,8 @@ export const createUser = async (
       return {
         status: 200,
         success: true,
-        message: "Successfully created",
+        message: `Successfully Registerd Welcome ${createnewUser.name}`,
+        data : createnewUser
       };
     }
     throw ErrorResponse.badRequest("User already exist");

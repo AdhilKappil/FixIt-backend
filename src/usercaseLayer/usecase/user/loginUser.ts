@@ -38,8 +38,9 @@ export const loginUser = async (
         return {
           status: 200,
           success: true,
-        //   data: token,
-          message: "Sucessfully logged In",
+          // data: token,
+          data:user,
+          message: `Login successful. Welcome ${user.name}`,
         };
       }
       throw ErrorResponse.badRequest("Wrong password or email");
