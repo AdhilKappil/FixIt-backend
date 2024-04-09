@@ -1,6 +1,7 @@
 import { IServiceRepository } from "../interface/repository/IserviceRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { createService } from "./service/createService";
+import { getService } from "./service/gerService";
 
 export class ServiceUseCase {
   private readonly serviceRepository: IServiceRepository;
@@ -38,4 +39,12 @@ export class ServiceUseCase {
       service_img
     );
   }
+
+  // user get all user data
+  async getService() {
+    return getService(
+    );
+  }
+
+
 }

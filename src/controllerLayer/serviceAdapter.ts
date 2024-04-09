@@ -24,4 +24,20 @@ export class ServiceAdapter {
     }
   }
 
+   // @desc    Get all service
+  //route     Get /api/admin/getService
+  //@access   Private
+  async getService(req: Req, res: Res, next: Next) {
+    try {
+      const service = await this.serviceusecase.getService();
+      service &&
+        res.status(service.status).json({
+          success: service.success,
+          data: service.data,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
 }

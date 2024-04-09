@@ -1,4 +1,5 @@
 import { IAdmin } from "../../../domainLayer/admin";
+import { IService } from "../../../domainLayer/service";
 import { IUser } from "../../../domainLayer/user";
 
 
@@ -18,6 +19,14 @@ export interface AdminData {
 
 // Modify the Response interface to use AdminData as the generic type for data
 export interface AdminResponse<T = AdminData | string> {
+  status: number;
+  success: boolean;
+  message?: string;
+  data?: T;
+}
+
+
+export interface ServiceResponse<T = IService| IService[]|string> {
   status: number;
   success: boolean;
   message?: string;

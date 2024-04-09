@@ -30,11 +30,18 @@ router.patch(
 
 // ============= Service related routes ================= //
 
-  // roure for admin login
+  // roure for create service
   router.post(
     "/createService",
     (req: Request, res: Response, next: NextFunction) =>
       serviceAdapter.createService(req, res, next)
+  );
+
+  // route for get all services
+  router.get(
+    "/getServices",
+    (req: Request, res: Response, next: NextFunction) =>
+      serviceAdapter.getService(req, res, next)
   );
 
 
