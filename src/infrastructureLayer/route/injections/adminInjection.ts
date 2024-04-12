@@ -1,6 +1,6 @@
 
 import { AdminAdapter } from "../../../controllerLayer/adminAdapter";
-import { AdminUseCase } from "../../../usercaseLayer/usecase/adminUseCase";
+import { AdminUseCase } from "../../../usecaseLayer/usecase/adminUseCase";
 import AdminModel from "../../database/model/adminModel";
 import UserModel from "../../database/model/userModel";
 import { AdminRepository } from "../../database/repository/adminRepository";

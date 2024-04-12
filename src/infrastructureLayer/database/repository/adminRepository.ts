@@ -1,5 +1,5 @@
 import { IAdmin } from "../../../domainLayer/admin";
-import { IAdminRepository } from "../../../usercaseLayer/interface/repository/IadminRepository";
+import { IAdminRepository } from "../../../usecaseLayer/interface/repository/IadminRepository";
 import AdminModel from "../model/adminModel";
 import { findAdmin } from "./admin/findAdmin";
 

@@ -1,5 +1,5 @@
 import { UserAdapter } from "../../../controllerLayer/userAdapter";
-import { UserUseCase } from "../../../usercaseLayer/usecase/userUseCase";
+import { UserUseCase } from "../../../usecaseLayer/usecase/userUseCase";
 import UserModel from "../../database/model/userModel";
 import { UserRepository } from "../../database/repository/userRepository";
 import Encrypt from "../../services/bcrypt";

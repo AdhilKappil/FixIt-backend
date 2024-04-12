@@ -2,6 +2,7 @@ import ErrorResponse from "../../handler/errorResponse";
 import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
+import Ijwt from "../../interface/services/Ijwt";
 import { Response } from "../../interface/services/Iresponse";
 
 
@@ -9,6 +10,7 @@ export const createUser = async (
   requestValidator: IRequestValidator,
   userRepository: IUserRepository,
   bcrypt: IHashpassword,
+  jwt : Ijwt,
   name: string,
   mobile: string,
   email: string,
@@ -35,10 +37,13 @@ export const createUser = async (
         password: hashedPassword,
       };
       const createnewUser = await userRepository.createUser(newUser);
+      const token = jwt.createJWT(createnewUser._id as string, createnewUser.email, "user", createnewUser.name);
+
       return {
         status: 200,
         success: true,
         message: `Successfully Registerd Welcome ${createnewUser.name}`,
+        token : token,
         data : createnewUser
       };
     }

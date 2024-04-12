@@ -1,6 +1,6 @@
 
 import jwt from "jsonwebtoken";
-import Ijwt from "../../usercaseLayer/interface/services/Ijwt";
+import Ijwt from "../../usecaseLayer/interface/services/Ijwt";
 
 class JwtPassword implements Ijwt {
   //to create jwt token
@@ -9,7 +9,8 @@ class JwtPassword implements Ijwt {
     if (jwtKey) {
       const token: string = jwt.sign(
         { id: userId, email: email, role: role, name: name },
-        jwtKey
+        jwtKey,
+        { expiresIn: '30d' }
       );
       return token;
     }

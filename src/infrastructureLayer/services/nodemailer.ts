@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import INodemailer from "../../usercaseLayer/interface/services/Inodemailer";
+import INodemailer from "../../usecaseLayer/interface/services/Inodemailer";
 
 class Nodemailer implements INodemailer {
   private otps: Map<string, string> = new Map();

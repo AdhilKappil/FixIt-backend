@@ -8,6 +8,7 @@ export interface Response<T = IUser| IUser[]|string> {
   success: boolean;
   message?: string;
   data?: T;
+  token? : string
 }
 
 
@@ -23,6 +24,7 @@ export interface AdminResponse<T = AdminData | string> {
   success: boolean;
   message?: string;
   data?: T;
+  token? : string
 }
 
 

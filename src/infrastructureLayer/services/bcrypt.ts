@@ -1,6 +1,6 @@
 
 import bcrypt from "bcryptjs";
-import IHashpassword from "../../usercaseLayer/interface/services/Ihashpassword";
+import IHashpassword from "../../usecaseLayer/interface/services/Ihashpassword";
 
 class Encrypt implements IHashpassword {
   //to hash the password

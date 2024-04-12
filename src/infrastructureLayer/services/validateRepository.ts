@@ -1,4 +1,4 @@
-import { IRequestValidator } from "../../usercaseLayer/interface/repository/IvalidareRepository";
+import { IRequestValidator } from "../../usecaseLayer/interface/repository/IvalidareRepository";
 
 
 interface ValidationResult {

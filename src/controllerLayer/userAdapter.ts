@@ -1,5 +1,5 @@
 import { Next, Req, Res } from "../infrastructureLayer/types/expressTypes";
-import { UserUseCase } from "../usercaseLayer/usecase/userUseCase";
+import { UserUseCase } from "../usecaseLayer/usecase/userUseCase";
 
 export class UserAdapter {
   private readonly userusecase: UserUseCase;
@@ -13,6 +13,13 @@ export class UserAdapter {
     try {
       const newUser = await this.userusecase.createUser(req.body);
       newUser &&
+
+      res.cookie('jwt', newUser.token, {
+        httpOnly: true,
+        sameSite: 'strict', // Prevent CSRF attacks
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      });
+
         res.status(newUser.status).json({
           success: newUser.success,
           message: newUser.message,
@@ -29,10 +36,18 @@ export class UserAdapter {
     try {
       const user = await this.userusecase.loginUser(req.body);
       user &&
+
+      res.cookie('jwt', user.token, {
+        httpOnly: true,
+        sameSite: 'strict', // Prevent CSRF attacks
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      });
+
         res.status(user.status).json({
           success: user.success,
           data: user.data,
           message: user.message,
+
         });
     } catch (err) {
       next(err);

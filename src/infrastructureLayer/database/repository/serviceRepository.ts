@@ -1,5 +1,5 @@
 import { IService } from "../../../domainLayer/service";
-import { IServiceRepository } from "../../../usercaseLayer/interface/repository/IserviceRepository";
+import { IServiceRepository } from "../../../usecaseLayer/interface/repository/IserviceRepository";
 import ServiceModel from "../model/serviceModel";
 import { createService } from "./service/createService";
 import { findService } from "./service/findService";

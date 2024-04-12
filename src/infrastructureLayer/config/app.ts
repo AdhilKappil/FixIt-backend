@@ -6,7 +6,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import userRouter from '../route/userRoute'
 import adminRouter from '../route/adminRoute';
-import errorHandler from '../../usercaseLayer/handler/errorHandler';
+import errorHandler from '../../usecaseLayer/handler/errorHandler';
 
 
 dotenv.config();

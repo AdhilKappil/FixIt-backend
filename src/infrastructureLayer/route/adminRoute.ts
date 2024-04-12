@@ -2,6 +2,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { adminAdapter } from "./injections/adminInjection";
 import { serviceAdapter } from "./injections/serviceInjection";
+import AuthMiddleware from "../Middleware/authMiddleware";
 
 
 const router = express.Router();
@@ -16,7 +17,7 @@ router.post(
 
  // roure for get user data
  router.get(
-  "/getUsers",
+  "/getUsers",AuthMiddleware.protectAdmin,
   (req: Request, res: Response, next: NextFunction) =>
     adminAdapter.getUsers(req, res, next)
 );

@@ -1,5 +1,5 @@
 import { IUser } from "../../../domainLayer/user";
-import { IUserRepository } from "../../../usercaseLayer/interface/repository/IuserRepository";
+import { IUserRepository } from "../../../usecaseLayer/interface/repository/IuserRepository";
 import UserModel from "../model/userModel";
 import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";

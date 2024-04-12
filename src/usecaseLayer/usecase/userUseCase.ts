@@ -47,6 +47,7 @@ export class UserUseCase {
       this.requestValidator,
       this.userRepository,
       this.bcrypt,
+      this.jwt,
       name,
       mobile,
       email,

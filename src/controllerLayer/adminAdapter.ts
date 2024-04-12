@@ -1,5 +1,5 @@
 import { Next, Req, Res } from "../infrastructureLayer/types/expressTypes";
-import { AdminUseCase } from "../usercaseLayer/usecase/adminUseCase";
+import { AdminUseCase } from "../usecaseLayer/usecase/adminUseCase";
 
 export class AdminAdapter {
   private readonly adminusecase: AdminUseCase;
@@ -14,6 +14,13 @@ export class AdminAdapter {
       const user = await this.adminusecase.loginAdmin(req.body);
 
       user &&
+
+      res.cookie('jwt', user.token, {
+        httpOnly: true,
+        sameSite: 'strict', // Prevent CSRF attacks
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      });
+
         res.status(user.status).json({
           success: user.success,
           data: user.data,

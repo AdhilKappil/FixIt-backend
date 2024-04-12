@@ -1,5 +1,5 @@
 import { Next, Req, Res } from "../infrastructureLayer/types/expressTypes";
-import { ServiceUseCase } from "../usercaseLayer/usecase/serviceUseCase";
+import { ServiceUseCase } from "../usecaseLayer/usecase/serviceUseCase";
 
 export class ServiceAdapter {
   private readonly serviceusecase: ServiceUseCase;

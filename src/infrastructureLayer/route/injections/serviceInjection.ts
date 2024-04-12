@@ -1,5 +1,5 @@
 import { ServiceAdapter } from "../../../controllerLayer/serviceAdapter";
-import { ServiceUseCase } from "../../../usercaseLayer/usecase/serviceUseCase";
+import { ServiceUseCase } from "../../../usecaseLayer/usecase/serviceUseCase";
 import ServiceModel from "../../database/model/serviceModel";
 import { ServiceRepository } from "../../database/repository/serviceRepository";
 import RequestValidator from "../../services/validateRepository";

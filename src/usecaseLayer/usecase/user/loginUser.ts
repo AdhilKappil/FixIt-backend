@@ -1,19 +1,19 @@
-import { IAdmin } from "../../../domainLayer/admin";
+import { IUser } from "../../../domainLayer/user";
 import ErrorResponse from "../../handler/errorResponse";
-import { IAdminRepository } from "../../interface/repository/IadminRepository";
+import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { AdminData, AdminResponse } from "../../interface/services/Iresponse";
+import { Response } from "../../interface/services/Iresponse";
 
-export const loginAdmin = async (
+export const loginUser = async (
   requestValidator: IRequestValidator,
-  adminRepository: IAdminRepository,
+  userRepository: IUserRepository,
   bcrypt: IHashpassword,
   jwt: Ijwt,
   email: string,
   password: string
-): Promise<AdminResponse> => {
+): Promise<Response> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -25,28 +25,22 @@ export const loginAdmin = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-    const admin: IAdmin | null = await adminRepository.findAdmin(email);
+    const user: IUser | null = await userRepository.findUser(email);
 
-    if (admin && admin._id) {
-      const match: boolean = await bcrypt.compare(password, admin.password);
+    if (user && user._id) {
+      if (user.isBlocked) {
+        throw ErrorResponse.badRequest("User is blocked");
+      }
+      const match: boolean = await bcrypt.compare(password, user.password);
       if (match) {
-        const token = jwt.createJWT(
-          admin._id,
-          admin.email,
-          "admin",
-          admin.name
-        );
-
-        const responseData: AdminData = {
-          _id: admin._id,
-          name: admin.name
-        };
+        const token = jwt.createJWT(user._id, user.email, "user", user.name);
 
         return {
           status: 200,
           success: true,
-          data: responseData,
-          message: `Login successful. Welcome ${admin.name}`,
+          token: token,
+          data:user,
+          message: `Login successful. Welcome ${user.name}`,
         };
       }
       throw ErrorResponse.badRequest("Wrong password or email");
