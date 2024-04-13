@@ -2,6 +2,7 @@ import { IService } from "../../../domainLayer/service";
 import { IServiceRepository } from "../../../usecaseLayer/interface/repository/IserviceRepository";
 import ServiceModel from "../model/serviceModel";
 import { createService } from "./service/createService";
+import { editService } from "./service/editService";
 import { findService } from "./service/findService";
 
 
@@ -13,6 +14,11 @@ export class ServiceRepository implements  IServiceRepository{
   // Create new user
   async createService(newService: IService): Promise<string> {
     return createService(newService, this.serviceModel);
+  }
+
+   // Create new user
+   async editService(updateService: IService): Promise<string> {
+    return editService(updateService, this.serviceModel);
   }
 
    // Check if a user exists using email

@@ -5,23 +5,24 @@ import { IRequestValidator } from "../../interface/repository/IvalidareRepositor
 
 
 // create new service
-export const createService = async (
+export const editService = async (
   requestValidator: IRequestValidator,
   serviceRepository: IServiceRepository,
+  _id : string,
   serviceName: string,
-  // firstHourCharge: number,
-  // laterHourCharge: number,
   description: string,
-  service_img: string
+  isBlocked : boolean
+//   service_img: string
 ): Promise<string> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { serviceName, description, service_img },
+      { _id,serviceName, description,isBlocked },
       [
+        "_id",
         "serviceName",
         "description",
-        "service_img",
+        "isBlocked"
       ]
     );
 
@@ -29,17 +30,19 @@ export const createService = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-    const service = await serviceRepository.findService(serviceName); // checking if the service exist or not
-    if (!service) {
-      const newService = {
+    // const service = await serviceRepository.findService(serviceName); // checking if the service exist or not
+    // if (!service) {
+      const updateService = {
         serviceName,
         description,
-        service_img,
+        isBlocked,
+        _id
+        // service_img,
       };
-      const createnewService = await serviceRepository.createService(newService);
+      const createnewService = await serviceRepository.editService(updateService);
       return createnewService
-    }
-    throw ErrorResponse.badRequest("Service already exist");
+    // }
+    // throw ErrorResponse.badRequest("Service already exist");
   } catch (err) {
     throw err;
   }

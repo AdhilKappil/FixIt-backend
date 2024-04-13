@@ -1,6 +1,7 @@
 import { IServiceRepository } from "../interface/repository/IserviceRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { createService } from "./service/createService";
+import { editService } from "./service/editService";
 import { getService } from "./service/gerService";
 
 export class ServiceUseCase {
@@ -18,14 +19,14 @@ export class ServiceUseCase {
   //to create service
   async createService({
     serviceName,
-    firstHourCharge,
-    laterHourCharge,
+    // firstHourCharge,
+    // laterHourCharge,
     description,
     service_img,
   }: {
     serviceName: string;
-    firstHourCharge: number;
-    laterHourCharge: number;
+    // firstHourCharge: number;
+    // laterHourCharge: number;
     description: string;
     service_img: string;
   }) {
@@ -33,8 +34,8 @@ export class ServiceUseCase {
       this.requestValidator,
       this.serviceRepository,
       serviceName,
-      firstHourCharge,
-      laterHourCharge,
+      // firstHourCharge,
+      // laterHourCharge,
       description,
       service_img
     );
@@ -43,6 +44,30 @@ export class ServiceUseCase {
   // user get all user data
   async getService() {
     return getService(
+    );
+  }
+
+  async editService({
+    _id,
+    serviceName,
+    isBlocked,
+    description,
+    // service_img,
+  }: {
+    _id : string
+    serviceName: string;
+    isBlocked : boolean;
+    description: string;
+    // service_img: string;
+  }) {
+    return editService(
+      this.requestValidator,
+      this.serviceRepository,
+      _id,
+      serviceName,
+      description,
+      isBlocked,
+      // service_img
     );
   }
 

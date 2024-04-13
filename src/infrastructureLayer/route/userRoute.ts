@@ -12,11 +12,18 @@ router.post(
       userAdapter.createUser(req, res, next)
   );
 
-  // roure for user login
+  // route for user login
 router.post(
   "/login",
   (req: Request, res: Response, next: NextFunction) =>
     userAdapter.loginUser(req, res, next)
+);
+
+// Route for user logout
+router.post(
+  "/logout",
+  (req: Request, res: Response, next: NextFunction) =>
+    userAdapter.logoutUser(req, res, next)
 );
 
 //routes for email verification and send otp to email

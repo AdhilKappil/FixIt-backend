@@ -8,23 +8,22 @@ export class ServiceAdapter {
     this.serviceusecase = serviceusecase; // using dependency injection to call the adminusecase
   }
 
-
-   // @desc    Create Service the user
+  // @desc    Create Service the user
   //route     Post /api/admin/createServices
   //@access   Private
   async createService(req: Req, res: Res, next: Next) {
     try {
-      const newUser = await this.serviceusecase.createService(req.body);
-      newUser &&
+      const newService = await this.serviceusecase.createService(req.body);
+      newService &&
         res.status(200).json({
-           newUser
+          newService,
         });
     } catch (err) {
       next(err);
     }
   }
 
-   // @desc    Get all service
+  // @desc    Get all service
   //route     Get /api/admin/getService
   //@access   Private
   async getService(req: Req, res: Res, next: Next) {
@@ -39,5 +38,25 @@ export class ServiceAdapter {
       next(err);
     }
   }
+
+  //  @desc    Get all service
+  // route     Get /api/admin/getService
+  // @access   Private
+  async editService(req: Req, res: Res, next: Next) {
+    console.log('edit');
+    
+    try {
+      const service = await this.serviceusecase.editService(req.body);
+      console.log(service);
+      
+      service &&
+        res.status(200).json({
+          service
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
 
 }

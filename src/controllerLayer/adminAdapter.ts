@@ -8,29 +8,33 @@ export class AdminAdapter {
     this.adminusecase = adminusecase; // using dependency injection to call the adminusecase
   }
 
-  //to login admin
+  // @desc  Login admin
+  //route     Post api/admin/login
+  //@access   Public
   async loginAdmin(req: Req, res: Res, next: Next) {
     try {
       const user = await this.adminusecase.loginAdmin(req.body);
 
       user &&
-
-      res.cookie('jwt', user.token, {
-        httpOnly: true,
-        sameSite: 'strict', // Prevent CSRF attacks
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      });
-
-        res.status(user.status).json({
-          success: user.success,
-          data: user.data,
-          message: user.message,
+        res.cookie("jwt", user.token, {
+          httpOnly: true,
+          sameSite: "strict", // Prevent CSRF attacks
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
+
+      res.status(user.status).json({
+        success: user.success,
+        data: user.data,
+        message: user.message,
+      });
     } catch (err) {
       next(err);
     }
   }
 
+  // @desc  Get all user
+  //route     Get /api/admin/getUsers
+  //@access   Private
   async getUsers(req: Req, res: Res, next: Next) {
     try {
       const user = await this.adminusecase.findAllUser();
@@ -49,10 +53,10 @@ export class AdminAdapter {
   //@access   Private
   async blockUnblockUser(req: Req, res: Res, next: Next) {
     try {
-      const _id = req.query.id as string; 
+      const _id = req.query.id as string;
       const user = await this.adminusecase.blockUnblockUser(_id);
       console.log(user);
-      
+
       user &&
         res.status(user.status).json({
           success: user.success,

@@ -24,7 +24,7 @@ router.post(
 
 // roure for get user data
 router.patch(
-  "/users/unblock-block",
+  "/users/unblock-block",AuthMiddleware.protectAdmin,
   (req: Request, res: Response, next: NextFunction) =>
     adminAdapter.blockUnblockUser(req, res, next)
 );
@@ -33,7 +33,7 @@ router.patch(
 
   // roure for create service
   router.post(
-    "/createService",
+    "/createService",AuthMiddleware.protectAdmin,
     (req: Request, res: Response, next: NextFunction) =>
       serviceAdapter.createService(req, res, next)
   );
@@ -45,6 +45,11 @@ router.patch(
       serviceAdapter.getService(req, res, next)
   );
 
+  router.put(
+    "/editService",AuthMiddleware.protectAdmin,
+    (req: Request, res: Response, next: NextFunction) =>
+      serviceAdapter.editService(req, res, next)
+  );  
 
   
 export default router  
