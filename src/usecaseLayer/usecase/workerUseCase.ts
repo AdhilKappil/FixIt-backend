@@ -3,6 +3,7 @@ import { IWorkerRepository } from "../interface/repository/IworekerRepository";
 import IHashpassword from "../interface/services/Ihashpassword";
 import Ijwt from "../interface/services/Ijwt";
 import { createWorker } from "./worker/createWorker";
+import { loginWorker } from "./worker/loginWorker";
 
 
 
@@ -68,18 +69,16 @@ export class WorkerUseCase {
     );
   }
 
-// user can login here
-//   async loginUser({ email, password }: { email: string; password: string }) {
-//     return loginUser(
-//       this.requestValidator,
-//       this.workerRepository,
-//       this.bcrypt,
-//       this.jwt,
-//       email,
-//       password
-//     );
-//   }
-
-  
+// worker can login here
+  async loginWorker({ email, password }: { email: string; password: string }) {
+    return loginWorker(
+      this.requestValidator,
+      this.workerRepository,
+      this.bcrypt,
+      this.jwt,
+      email,
+      password
+    );
+  }
 
 }

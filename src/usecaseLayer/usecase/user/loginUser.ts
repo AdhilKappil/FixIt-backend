@@ -29,7 +29,7 @@ export const loginUser = async (
 
     if (user && user._id) {
       if (user.isBlocked) {
-        throw ErrorResponse.badRequest("User is blocked");
+        throw ErrorResponse.badRequest("You account is blocked");
       }
       const match: boolean = await bcrypt.compare(password, user.password);
       if (match) {

@@ -12,12 +12,12 @@ router.post(
       workerAdapter.createWorker(req, res, next)
   );
 
-//   // route for user login
-// router.post(
-//   "/login",
-//   (req: Request, res: Response, next: NextFunction) =>
-//     userAdapter.loginUser(req, res, next)
-// );
+  // route for user login
+router.post(
+  "/login",
+  (req: Request, res: Response, next: NextFunction) =>
+    workerAdapter.loginWorker(req, res, next)
+);
 
 // // Route for user logout
 // router.post(
