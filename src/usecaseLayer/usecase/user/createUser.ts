@@ -3,7 +3,7 @@ import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { Response } from "../../interface/services/Iresponse";
+import { IResponse } from "../../interface/services/Iresponse";
 
 
 export const createUser = async (
@@ -15,7 +15,7 @@ export const createUser = async (
   mobile: string,
   email: string,
   password: string
-): Promise<Response> => {
+): Promise<IResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(

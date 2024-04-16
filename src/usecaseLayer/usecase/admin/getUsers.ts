@@ -1,7 +1,7 @@
 import UserModel from "../../../infrastructureLayer/database/model/userModel";
-import { Response } from "../../interface/services/Iresponse";
+import { IUserResponse } from "../../interface/services/Iresponse";
 
-export const getUsers = async (): Promise<Response> => {
+export const getUsers = async (): Promise<IUserResponse> => {
   try {
     const users = await UserModel.find({}).select("-password");
     return {

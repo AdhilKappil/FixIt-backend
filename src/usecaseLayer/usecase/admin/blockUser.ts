@@ -1,14 +1,14 @@
 import ErrorResponse from "../../handler/errorResponse";
 import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
-import { Response } from "../../interface/services/Iresponse";
+import { IResponse } from "../../interface/services/Iresponse";
 
 
 export const blockUnblockUser = async (
   requestValidator: IRequestValidator,
   userRepository: IUserRepository,
   _id : string
-): Promise<Response> => {
+): Promise<IResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(

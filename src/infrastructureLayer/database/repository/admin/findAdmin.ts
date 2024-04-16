@@ -8,8 +8,7 @@ export const findAdmin = async(
 ) => {
    try {
      console.log('email in findAdminByEmail in adminRepository --->>>> ', email)
-     const allAdmins = await adminModel.find();
-     
+   //   const allAdmins = await adminModel.find();
         const existingAdmin = await adminModel.findOne({ email: email });
         return existingAdmin
    } catch (error) {

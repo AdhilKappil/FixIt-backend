@@ -7,6 +7,7 @@ import morgan from 'morgan'
 import userRouter from '../route/userRoute'
 import adminRouter from '../route/adminRoute';
 import errorHandler from '../../usecaseLayer/handler/errorHandler';
+import workerRouter from '../route/workerRoute';
 
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(morgan('dev'))
 // Routes
 app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/worker", workerRouter);
 
 // error handler middleware
 app.use(errorHandler)

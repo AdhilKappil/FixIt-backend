@@ -1,7 +1,7 @@
 import ErrorResponse from "../../handler/errorResponse";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import INodemailer from "../../interface/services/Inodemailer";
-import { Response } from "../../interface/services/Iresponse";
+import { IResponse } from "../../interface/services/Iresponse";
 
 
 export const emailVeification = async (
@@ -9,7 +9,7 @@ export const emailVeification = async (
   nodemailer: INodemailer,
   otp: string,
   email: string
-): Promise<Response> => {
+): Promise<IResponse> => {
   try {
     console.log(email);
 

@@ -16,7 +16,7 @@ export class AdminAdapter {
       const user = await this.adminusecase.loginAdmin(req.body);
 
       user &&
-        res.cookie("jwt", user.token, {
+        res.cookie("adminjwt", user.token, {
           httpOnly: true,
           sameSite: "strict", // Prevent CSRF attacks
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days

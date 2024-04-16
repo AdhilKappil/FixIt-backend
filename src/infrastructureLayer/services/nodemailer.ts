@@ -76,6 +76,7 @@ class Nodemailer implements INodemailer {
       throw new Error("Wrong otp");
     }
   }
+
 }
 
 export default Nodemailer;

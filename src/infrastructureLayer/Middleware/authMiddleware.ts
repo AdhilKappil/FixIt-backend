@@ -23,7 +23,7 @@ class AuthMiddleware {
     let token: string | undefined;
 
     console.log('User protect');
-    token = req.cookies.jwt;
+    token = req.cookies.userjwt;
 
     const userRepository = new UserRepository(UserModel);
 
@@ -55,7 +55,7 @@ class AuthMiddleware {
     let token: string | undefined;
 
     console.log('Admin protect');
-    token = req.cookies.jwt;
+    token = req.cookies.adminjwt;
 
     const adminRepository = new AdminRepository(AdminModel);
 

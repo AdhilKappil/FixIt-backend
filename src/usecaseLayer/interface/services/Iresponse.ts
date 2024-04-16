@@ -3,29 +3,30 @@ import { IService } from "../../../domainLayer/service";
 import { IUser } from "../../../domainLayer/user";
 
 
-export interface Response<T = IUser| IUser[]|string> {
-  status: number;
-  success: boolean;
-  message?: string;
-  data?: T;
-  token? : string
-}
 
-
-
-export interface AdminData {
+export interface StoreData {
   _id: string;
   name: string;
+  email : string
 }
 
-// Modify the Response interface to use AdminData as the generic type for data
-export interface AdminResponse<T = AdminData | string> {
+
+export interface IResponse<T = StoreData | string> {
   status: number;
   success: boolean;
   message?: string;
   data?: T;
   token? : string
 }
+
+export interface IUserResponse<T = IUser| IUser[]|string> {
+  status: number;
+  success: boolean;
+  message?: string;
+  data?: T;
+  token? : string
+}
+
 
 
 export interface ServiceResponse<T = IService| IService[]|string> {
@@ -34,4 +35,6 @@ export interface ServiceResponse<T = IService| IService[]|string> {
   message?: string;
   data?: T;
 }
+
+
 

@@ -15,7 +15,7 @@ export class UserAdapter {
     try {
       const newUser = await this.userusecase.createUser(req.body);
       newUser &&
-        res.cookie("jwt", newUser.token, {
+        res.cookie("userjwt", newUser.token, {
           httpOnly: true,
           sameSite: "strict", // Prevent CSRF attacks
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -38,7 +38,7 @@ export class UserAdapter {
     try {
       const user = await this.userusecase.loginUser(req.body);
       user &&
-        res.cookie("jwt", user.token, {
+        res.cookie("userjwt", user.token, {
           httpOnly: true,
           sameSite: "strict", // Prevent CSRF attacks
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days

@@ -4,8 +4,6 @@ import { IService } from "../../../domainLayer/service";
 const serviceSchema: Schema = new Schema<IService & Document>(
   {
     serviceName: { type: String, required: true, unique:true},
-    // firstHourCharge: { type: Number, required: true },
-    // laterHourCharge: { type: Number, required: true },
     description: { type: String, required: true },
     service_img: { type: String, required:true},
     isBlocked: { type: Boolean, default: false },

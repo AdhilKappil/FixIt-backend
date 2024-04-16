@@ -4,7 +4,7 @@ import { IAdminRepository } from "../../interface/repository/IadminRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { AdminData, AdminResponse } from "../../interface/services/Iresponse";
+import { IResponse, StoreData } from "../../interface/services/Iresponse";
 
 export const loginAdmin = async (
   requestValidator: IRequestValidator,
@@ -13,7 +13,7 @@ export const loginAdmin = async (
   jwt: Ijwt,
   email: string,
   password: string
-): Promise<AdminResponse> => {
+): Promise<IResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -34,12 +34,13 @@ export const loginAdmin = async (
           admin._id,
           admin.email,
           "admin",
-          admin.name
+          admin.name,
         );
 
-        const responseData: AdminData = {
+        const responseData: StoreData = {
           _id: admin._id,
-          name: admin.name
+          name: admin.name,
+          email : admin.email
         };
 
         return {

@@ -1,5 +1,6 @@
 import { IUser } from "../../../domainLayer/user";
 import { IUserRepository } from "../../../usecaseLayer/interface/repository/IuserRepository";
+import { StoreData } from "../../../usecaseLayer/interface/services/Iresponse";
 import UserModel from "../model/userModel";
 import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";
@@ -11,7 +12,7 @@ export class UserRepository implements IUserRepository {
   constructor(private readonly usersModel: typeof UserModel) {}
 
   // Create new user
-  async createUser(newUser: IUser): Promise<IUser> {
+  async createUser(newUser: IUser): Promise<StoreData> {
     return createUser(newUser, this.usersModel);
   }
 

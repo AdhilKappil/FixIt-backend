@@ -3,7 +3,7 @@ import ErrorResponse from "../../handler/errorResponse";
 import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import INodemailer from "../../interface/services/Inodemailer";
-import { Response } from "../../interface/services/Iresponse";
+import { IResponse } from "../../interface/services/Iresponse";
 
 
 export const verifyEmail = async (
@@ -12,7 +12,7 @@ export const verifyEmail = async (
   nodemailer: INodemailer,
   email: string,
   name: string
-): Promise<Response> => {
+): Promise<IResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(

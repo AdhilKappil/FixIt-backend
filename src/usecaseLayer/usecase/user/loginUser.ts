@@ -4,7 +4,7 @@ import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { Response } from "../../interface/services/Iresponse";
+import { IResponse, StoreData } from "../../interface/services/Iresponse";
 
 export const loginUser = async (
   requestValidator: IRequestValidator,
@@ -13,7 +13,7 @@ export const loginUser = async (
   jwt: Ijwt,
   email: string,
   password: string
-): Promise<Response> => {
+): Promise<IResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -35,11 +35,17 @@ export const loginUser = async (
       if (match) {
         const token = jwt.createJWT(user._id, user.email, "user", user.name);
 
+        const responseData: StoreData = {
+          _id: user._id,
+          name: user.name,
+          email : user.email
+        };
+
         return {
           status: 200,
           success: true,
           token: token,
-          data:user,
+          data:responseData,
           message: `Login successful. Welcome ${user.name}`,
         };
       }
