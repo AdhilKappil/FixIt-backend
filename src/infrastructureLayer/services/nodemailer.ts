@@ -32,6 +32,9 @@ class Nodemailer implements INodemailer {
         },
       });
 
+      if(this.otps){
+        this.otps.clear();
+      }
       const otp = this.generateOTP();
       this.otps.set(email, otp);
       console.log(this.otps);

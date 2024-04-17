@@ -1,10 +1,11 @@
 import { IUser } from "../../../domainLayer/user";
 import { IUserRepository } from "../../../usecaseLayer/interface/repository/IuserRepository";
-import { StoreData } from "../../../usecaseLayer/interface/services/Iresponse";
+import { IforgotPassword, StoreData } from "../../../usecaseLayer/interface/services/Iresponse";
 import UserModel from "../model/userModel";
 import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";
 import { findUser } from "./user/findUser";
+import { forgotPassword } from "./user/forgotPassword";
 
 
 // This class for exporting all the single DB operations togethor 
@@ -24,6 +25,11 @@ export class UserRepository implements IUserRepository {
   // admin can block user
   async blockUser(_id: string): Promise<string | null> {
     return blockUser(_id,this.usersModel)
+  }
+
+  // Create new user
+  async forgotPassword(newPassword: IforgotPassword): Promise<StoreData> {
+    return forgotPassword(newPassword, this.usersModel);
   }
 
 }

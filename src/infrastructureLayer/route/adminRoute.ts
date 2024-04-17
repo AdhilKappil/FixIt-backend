@@ -22,7 +22,7 @@ router.post(
     adminAdapter.getUsers(req, res, next)
 );
 
-// roure for get user data
+// roure for block user
 router.patch(
   "/users/unblock-block",AuthMiddleware.protectAdmin,
   (req: Request, res: Response, next: NextFunction) =>

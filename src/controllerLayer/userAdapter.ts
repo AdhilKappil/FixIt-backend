@@ -80,7 +80,7 @@ export class UserAdapter {
   }
 
 
-  // @desc  send email to user new user
+  // @desc  send ottp to new user email
   //route     POST api/user/sendEmail
   //@access   Public
   async sendEmail(req: Req, res: Res, next: Next) {
@@ -111,6 +111,46 @@ export class UserAdapter {
       next(err);
     }
   }
+
+    // @desc  send ottp to forget password
+  //route     POST api/user/sednOtpFogotPassword
+  //@access   Public
+  async sednOtpFogotPassword(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.userusecase.sendOtpFogotPassword(req.body);
+      res.status(user.status).json({
+        success: user.success,
+        message: user.message,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+  // @desc    Forgot password save
+  //route     POST api/user/singup
+  //@access   Public
+  async fogotPassword(req: Req, res: Res, next: Next) {
+    try {
+      const newUser = await this.userusecase.forgotPassword(req.body);
+      newUser &&
+        res.cookie("userjwt", newUser.token, {
+          httpOnly: true,
+          sameSite: "strict", // Prevent CSRF attacks
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        });
+
+      res.status(newUser.status).json({
+        success: newUser.success,
+        message: newUser.message,
+        user: newUser.data,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
 
   // @desc    Logout user / clear cookie
   // @route   POST /api/user/logout

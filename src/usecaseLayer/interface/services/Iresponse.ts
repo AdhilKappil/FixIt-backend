@@ -28,12 +28,17 @@ export interface IUserResponse<T = IUser| IUser[]|string> {
 }
 
 
-
 export interface ServiceResponse<T = IService| IService[]|string> {
   status: number;
   success: boolean;
   message?: string;
   data?: T;
+}
+
+
+export interface IforgotPassword {
+  email : string;
+  password : string
 }
 
 

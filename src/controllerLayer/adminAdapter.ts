@@ -55,8 +55,6 @@ export class AdminAdapter {
     try {
       const _id = req.query.id as string;
       const user = await this.adminusecase.blockUnblockUser(_id);
-      console.log(user);
-
       user &&
         res.status(user.status).json({
           success: user.success,

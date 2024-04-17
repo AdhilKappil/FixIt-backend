@@ -6,9 +6,11 @@ import Ijwt from "../interface/services/Ijwt";
 import INodemailer from "../interface/services/Inodemailer";
 import { createUser } from "./user/createUser";
 import { emailVeification } from "./user/emailVerification";
+import { forgotPassword } from "./user/forgotPassword";
 import { googleAuth } from "./user/googleAuth";
 import { loginUser } from "./user/loginUser";
 import { verifyEmail } from "./user/sendEmail";
+import { sendOtpFogotPassword } from "./user/sendOtpForgotPassword";
 
 
 export class UserUseCase {
@@ -65,7 +67,6 @@ export class UserUseCase {
     password,
   }: {
     name: string;
-    mobile: string;
     email: string;
     password: string;
   }) {
@@ -100,6 +101,30 @@ export class UserUseCase {
   //to check if the user entered OTP is correct or not
   async emailVeification({ otp, email }: { otp: string; email: string }) {
     return emailVeification(this.requestValidator, this.nodemailer, otp, email);
+  }
+
+
+   //to send OTP to verify the user's detail
+   async sendOtpFogotPassword({ email, name }: { email: string; name: string }) {
+    return sendOtpFogotPassword(this.requestValidator,this.userRepository, this.nodemailer, email, name);
+  }
+
+   //to save forgot password user
+   async forgotPassword({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) {
+    return forgotPassword(
+      this.requestValidator,
+      this.userRepository,
+      this.bcrypt,
+      this.jwt,
+      email,
+      password
+    );
   }
   
 
