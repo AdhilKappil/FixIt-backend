@@ -19,6 +19,13 @@ router.post(
     userAdapter.loginUser(req, res, next)
 );
 
+// route user google auth
+router.post(
+  "/googleAuth",
+  (req: Request, res: Response, next: NextFunction) =>
+    userAdapter.googleAuth(req, res, next)
+);
+
 // Route for user logout
 router.post(
   "/logout",

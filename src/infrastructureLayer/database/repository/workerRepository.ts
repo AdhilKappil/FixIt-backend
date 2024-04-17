@@ -16,7 +16,7 @@ export class WorkerRepository implements IWorkerRepository {
   }
 
   // Check if a worker exists using email
-  async findWorker(email: string): Promise<StoreData | null> {
+  async findWorker(email: string): Promise<IWorker | null> {
     return findWorker(email, this.workerModel);
   }
 

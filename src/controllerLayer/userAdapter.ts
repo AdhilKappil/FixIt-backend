@@ -31,6 +31,7 @@ export class UserAdapter {
     }
   }
 
+
   // @desc  Register new user
   //route     POST api/user/login
   //@access   Public
@@ -53,6 +54,31 @@ export class UserAdapter {
       next(err);
     }
   }
+
+
+  // @desc    Sign in or SignUp using google auth
+  //route     POST api/user/googleAuth
+  //@access   Public
+  async googleAuth(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.userusecase.googleAuth(req.body);
+      user &&
+        res.cookie("userjwt", user.token, {
+          httpOnly: true,
+          sameSite: "strict", // Prevent CSRF attacks
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        });
+
+      res.status(user.status).json({
+        success: user.success,
+        data: user.data,
+        message: user.message,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
 
   // @desc  send email to user new user
   //route     POST api/user/sendEmail

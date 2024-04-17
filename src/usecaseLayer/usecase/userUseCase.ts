@@ -6,6 +6,7 @@ import Ijwt from "../interface/services/Ijwt";
 import INodemailer from "../interface/services/Inodemailer";
 import { createUser } from "./user/createUser";
 import { emailVeification } from "./user/emailVerification";
+import { googleAuth } from "./user/googleAuth";
 import { loginUser } from "./user/loginUser";
 import { verifyEmail } from "./user/sendEmail";
 
@@ -31,6 +32,7 @@ export class UserUseCase {
     this.requestValidator = requestValidator;
   }
 
+
   //to create user
   async createUser({
     name,
@@ -50,6 +52,29 @@ export class UserUseCase {
       this.jwt,
       name,
       mobile,
+      email,
+      password
+    );
+  }
+
+
+  //to create user
+  async googleAuth({
+    name,
+    email,
+    password,
+  }: {
+    name: string;
+    mobile: string;
+    email: string;
+    password: string;
+  }) {
+    return googleAuth(
+      this.requestValidator,
+      this.userRepository,
+      this.bcrypt,
+      this.jwt,
+      name,
       email,
       password
     );
