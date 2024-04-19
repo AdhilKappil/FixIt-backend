@@ -51,5 +51,12 @@ router.patch(
       serviceAdapter.editService(req, res, next)
   );  
 
+    // route for worker related
+    router.get(
+      "/getJoinRequests",
+      (req: Request, res: Response, next: NextFunction) =>
+        adminAdapter.getJoinRequests(req, res, next)
+    );
+
   
 export default router  

@@ -5,6 +5,7 @@ import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import IHashpassword from "../interface/services/Ihashpassword";
 import Ijwt from "../interface/services/Ijwt";
 import { blockUnblockUser } from "./admin/blockUser";
+import { getJoinRequests } from "./admin/getJoinRequests";
 import { getUsers } from "./admin/getUsers";
 import { loginAdmin } from "./admin/loginAdmin";
 
@@ -50,6 +51,12 @@ export class AdminUseCase {
   // user get all user data
   async findAllUser() {
     return getUsers(
+    );
+  }
+
+   // user get all user data
+   async findAllRequests() {
+    return getJoinRequests(
     );
   }
 

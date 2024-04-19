@@ -48,6 +48,26 @@ export class AdminAdapter {
     }
   }
 
+
+  // @desc  Get all join requests
+  //route     Get /api/admin/getJoinRequests
+  //@access   Private
+  async getJoinRequests(req: Req, res: Res, next: Next) {
+    console.log('heii');
+    
+    try {
+      const user = await this.adminusecase.findAllRequests();
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   // @desc    Block /Unblock the user
   //route     PATCH /api/admin/users/unblock-block
   //@access   Private
