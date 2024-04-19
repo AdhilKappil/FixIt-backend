@@ -1,4 +1,4 @@
-
+import Nodemailer from "../../services/nodemailer";
 import { AdminAdapter } from "../../../controllerLayer/adminAdapter";
 import { AdminUseCase } from "../../../usecaseLayer/usecase/adminUseCase";
 import AdminModel from "../../database/model/adminModel";
@@ -19,13 +19,15 @@ const workerRepository = new WorkerRepository(WorkerModel);
 const bcrypt = new Encrypt();
 const jwt = new JwtPassword();
 const requestValidator = new RequestValidator();
+const nodemailer = new Nodemailer();
 const adminusecase = new AdminUseCase(
   adminRepository,
   userRepository,
   workerRepository,
   bcrypt,
   jwt,  
-  requestValidator
+  requestValidator,
+  nodemailer
 );
 const adminAdapter = new AdminAdapter(adminusecase);
 

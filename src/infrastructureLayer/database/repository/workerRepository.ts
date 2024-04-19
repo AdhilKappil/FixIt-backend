@@ -1,5 +1,6 @@
 import { IWorker } from "../../../domainLayer/worker";
 import { IWorkerRepository } from "../../../usecaseLayer/interface/repository/IworekerRepository";
+import { RequesEmailData } from "../../../usecaseLayer/interface/services/Iresponse";
 import WorkerModel from "../model/workerModel";
 import { acceptOrRejectRequest } from "./worker/acceptRequest";
 import { createWorker } from "./worker/createWorker";
@@ -21,7 +22,7 @@ export class WorkerRepository implements IWorkerRepository {
   }
 
   // admin can block user
-  async acceptOrRejectRequest(id: string,status:string): Promise<string | null> {
+  async acceptOrRejectRequest(id: string,status:string): Promise<RequesEmailData> {
     return acceptOrRejectRequest(id,status,this.workerModel)
   }
 

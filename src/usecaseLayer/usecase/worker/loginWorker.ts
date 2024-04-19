@@ -36,9 +36,9 @@ export const loginWorker = async (
           "Your login will be activated as soon as your request is approved"
         );
       }
-      if (worker.status === "rejected") {
+      if (worker.status === "reject") {
         throw ErrorResponse.badRequest(
-          "Unfortunately, your job request has been rejected "
+          "Unfortunately, your job request has been rejected"
         );
       }
       const match: boolean = await bcrypt.compare(password, worker.password);

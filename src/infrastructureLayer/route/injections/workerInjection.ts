@@ -20,4 +20,4 @@ const workerusecase = new WorkerUseCase(
 );
 const workerAdapter = new WorkerAdapter(workerusecase);
 
-export { workerAdapter, workerRepository};
+export { workerAdapter};

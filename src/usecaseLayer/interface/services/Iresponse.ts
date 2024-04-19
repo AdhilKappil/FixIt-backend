@@ -11,6 +11,11 @@ export interface StoreData {
   email : string
 }
 
+export interface RequesEmailData {
+  name : string;
+  email: string;
+}
+
 
 export interface IResponse<T = StoreData | string> {
   status: number;

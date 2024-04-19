@@ -1,10 +1,10 @@
-
 import { IAdminRepository } from "../interface/repository/IadminRepository";
 import { IUserRepository } from "../interface/repository/IuserRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { IWorkerRepository } from "../interface/repository/IworekerRepository";
 import IHashpassword from "../interface/services/Ihashpassword";
 import Ijwt from "../interface/services/Ijwt";
+import INodemailer from "../interface/services/Inodemailer";
 import { acceptOrRejectRequest } from "./admin/acceptRequest";
 import { blockUnblockUser } from "./admin/blockUser";
 import { getJoinRequests } from "./admin/getJoinRequests";
@@ -20,6 +20,7 @@ export class AdminUseCase {
   private readonly bcrypt: IHashpassword;
   private readonly jwt: Ijwt;
   private readonly requestValidator: IRequestValidator;
+  private readonly nodemailer: INodemailer;
 
   constructor(
     adminRepository: IAdminRepository,
@@ -27,7 +28,9 @@ export class AdminUseCase {
     workerRepository:IWorkerRepository,
     bcrypt: IHashpassword,
     jwt: Ijwt,
-    requestValidator: IRequestValidator
+    requestValidator: IRequestValidator,
+    nodemailer: INodemailer,
+
   ) {
     this.userRepository = userRepository
     this.adminRepository = adminRepository;
@@ -35,6 +38,7 @@ export class AdminUseCase {
     this.bcrypt = bcrypt;
     this.jwt = jwt;
     this.requestValidator = requestValidator;
+    this.nodemailer = nodemailer;
   }
 
 
@@ -70,6 +74,7 @@ export class AdminUseCase {
     return acceptOrRejectRequest(
       this.requestValidator,
       this.workerRepository,
+      this.nodemailer,
       id,
       status
     );
