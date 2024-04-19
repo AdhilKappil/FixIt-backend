@@ -53,7 +53,6 @@ export class AdminAdapter {
   //route     Get /api/admin/getJoinRequests
   //@access   Private
   async getJoinRequests(req: Req, res: Res, next: Next) {
-    console.log('heii');
     
     try {
       const user = await this.adminusecase.findAllRequests();
@@ -61,6 +60,24 @@ export class AdminAdapter {
         res.status(user.status).json({
           success: user.success,
           data: user.data,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+  // @desc    Accept or reject worker join request
+  //route     PATCH /api/admin/worker/accept-rejectReques
+  //@access   Private
+  async acceptOrRejectRequest(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.adminusecase.acceptOrRejectRequest(req.body);
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+          message: user.message,
         });
     } catch (err) {
       next(err);
@@ -85,4 +102,5 @@ export class AdminAdapter {
       next(err);
     }
   }
+
 }

@@ -1,7 +1,7 @@
 import { IWorker } from "../../../domainLayer/worker";
 import { IWorkerRepository } from "../../../usecaseLayer/interface/repository/IworekerRepository";
-import { StoreData } from "../../../usecaseLayer/interface/services/Iresponse";
 import WorkerModel from "../model/workerModel";
+import { acceptOrRejectRequest } from "./worker/acceptRequest";
 import { createWorker } from "./worker/createWorker";
 import { findWorker } from "./worker/findWorker";
 
@@ -18,6 +18,11 @@ export class WorkerRepository implements IWorkerRepository {
   // Check if a worker exists using email
   async findWorker(email: string): Promise<IWorker | null> {
     return findWorker(email, this.workerModel);
+  }
+
+  // admin can block user
+  async acceptOrRejectRequest(id: string,status:string): Promise<string | null> {
+    return acceptOrRejectRequest(id,status,this.workerModel)
   }
 
 }

@@ -58,5 +58,11 @@ router.patch(
         adminAdapter.getJoinRequests(req, res, next)
     );
 
+    router.patch(
+      "/worker/accept-rejectRequest",AuthMiddleware.protectAdmin,
+      (req: Request, res: Response, next: NextFunction) =>
+        adminAdapter.acceptOrRejectRequest(req, res, next)
+    );
+
   
 export default router  

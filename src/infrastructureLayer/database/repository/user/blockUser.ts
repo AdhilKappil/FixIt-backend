@@ -11,7 +11,7 @@ export const blockUser = async (
             // Assuming isStatus is a property on the user model
             user.isBlocked = !user.isBlocked;
             await user.save();
-            return "User blocked successfully"; // Return success message
+            return "Successfully updated"; // Return success message
         } else {
             return null; // User not found
         }
