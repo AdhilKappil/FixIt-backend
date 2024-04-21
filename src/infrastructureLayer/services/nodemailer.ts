@@ -41,14 +41,17 @@ class Nodemailer implements INodemailer {
         to: email,
         subject: "Email Verification",
         html: `
-        <div>
-          <div style="margin-bottom: 10px">
-            Hello ${name}, Welcome to <strong>FixIt</strong>! We are excited to have you on board. To get started, please verify your email address:
+        <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2>Hello ${name}, Welcome to <strong>FixIt</strong>!</h2>
+            <p>We are excited to have you on board. To get started, please verify your email address:</p>
           </div>
-          <div style="width: 75%; margin: 0 auto; background-color: black; color: white; padding: 4px; font-size: 3rem; text-align: center;">
-            <strong style="text">${otp}</strong>
+          <div style="width: 75%; margin: 0 auto; background-color: black; color: white; padding: 4px; font-size: 3rem; text-align: center; border-radius: 5px;">
+            <strong>${otp}</strong>
           </div>
         </div>
+      </body>
       `,
       };
 

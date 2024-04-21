@@ -3,6 +3,7 @@ import { IWorkerRepository } from "../../../usecaseLayer/interface/repository/Iw
 import { RequesEmailData } from "../../../usecaseLayer/interface/services/Iresponse";
 import WorkerModel from "../model/workerModel";
 import { acceptOrRejectRequest } from "./worker/acceptRequest";
+import { blockWorker } from "./worker/blockWorker";
 import { createWorker } from "./worker/createWorker";
 import { findWorker } from "./worker/findWorker";
 
@@ -25,5 +26,10 @@ export class WorkerRepository implements IWorkerRepository {
   async acceptOrRejectRequest(id: string,status:string): Promise<RequesEmailData> {
     return acceptOrRejectRequest(id,status,this.workerModel)
   }
+
+    // admin can block worker
+    async blockWorker(_id: string): Promise<string | null> {
+      return blockWorker(_id,this.workerModel)
+    }
 
 }

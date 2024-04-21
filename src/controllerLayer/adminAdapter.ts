@@ -49,6 +49,25 @@ export class AdminAdapter {
   }
 
 
+   // @desc    Block /Unblock the user
+  //route     PATCH /api/admin/users/unblock-block
+  //@access   Private
+  async blockUnblockUser(req: Req, res: Res, next: Next) {
+    try {
+      const _id = req.query.id as string;
+      const user = await this.adminusecase.blockUnblockUser(_id);
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+          message: user.message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   // @desc  Get all join requests
   //route     Get /api/admin/getJoinRequests
   //@access   Private
@@ -85,22 +104,24 @@ export class AdminAdapter {
   }
 
 
-  // @desc    Block /Unblock the user
+   // @desc    Block /Unblock the user
   //route     PATCH /api/admin/users/unblock-block
   //@access   Private
-  async blockUnblockUser(req: Req, res: Res, next: Next) {
+  async block_unBlockWorker(req: Req, res: Res, next: Next) {
     try {
       const _id = req.query.id as string;
-      const user = await this.adminusecase.blockUnblockUser(_id);
-      user &&
-        res.status(user.status).json({
-          success: user.success,
-          data: user.data,
-          message: user.message,
+      const worker = await this.adminusecase.block_unBlockWorker(_id);
+      worker &&
+        res.status(worker.status).json({
+          success: worker.success,
+          data: worker.data,
+          message: worker.message,
         });
     } catch (err) {
       next(err);
     }
   }
+
+ 
 
 }

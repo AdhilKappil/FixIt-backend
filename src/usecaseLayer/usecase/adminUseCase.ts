@@ -7,6 +7,7 @@ import Ijwt from "../interface/services/Ijwt";
 import INodemailer from "../interface/services/Inodemailer";
 import { acceptOrRejectRequest } from "./admin/acceptRequest";
 import { blockUnblockUser } from "./admin/blockUser";
+import { block_unBlockWorker } from "./admin/blockWorker";
 import { getJoinRequests } from "./admin/getJoinRequests";
 import { getUsers } from "./admin/getUsers";
 import { loginAdmin } from "./admin/loginAdmin";
@@ -63,6 +64,14 @@ export class AdminUseCase {
     );
   }
 
+  // block or unblock user
+  async blockUnblockUser(_id:string) {
+    return blockUnblockUser(
+      this.requestValidator,
+      this.userRepository,
+      _id);
+  }
+
    // user get all user data
    async findAllRequests() {
     return getJoinRequests(
@@ -80,13 +89,12 @@ export class AdminUseCase {
     );
   }
 
-  async blockUnblockUser(_id:string) {
-    console.log(_id);
-    
-    return blockUnblockUser(
+  async block_unBlockWorker(_id:string) {
+    return block_unBlockWorker(
       this.requestValidator,
-      this.userRepository,
+      this.workerRepository,
       _id);
   }
+  
 
 }
