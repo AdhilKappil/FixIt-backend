@@ -19,14 +19,14 @@ export class ServiceUseCase {
   //to create service
   async createService({
     serviceName,
-    // firstHourCharge,
-    // laterHourCharge,
+    firstHourCharge,
+    laterHourCharge,
     description,
     service_img,
   }: {
     serviceName: string;
-    // firstHourCharge: number;
-    // laterHourCharge: number;
+    firstHourCharge: number;
+    laterHourCharge: number;
     description: string;
     service_img: string;
   }) {
@@ -34,8 +34,8 @@ export class ServiceUseCase {
       this.requestValidator,
       this.serviceRepository,
       serviceName,
-      // firstHourCharge,
-      // laterHourCharge,
+      firstHourCharge,
+      laterHourCharge,
       description,
       service_img
     );
@@ -51,12 +51,16 @@ export class ServiceUseCase {
     _id,
     serviceName,
     isBlocked,
+    firstHourCharge,
+    laterHourCharge,
     description,
     // service_img,
   }: {
     _id : string
     serviceName: string;
     isBlocked : boolean;
+    firstHourCharge:number;
+    laterHourCharge:number;
     description: string;
     // service_img: string;
   }) {
@@ -66,6 +70,8 @@ export class ServiceUseCase {
       _id,
       serviceName,
       description,
+      firstHourCharge,
+      laterHourCharge,
       isBlocked,
       // service_img
     );

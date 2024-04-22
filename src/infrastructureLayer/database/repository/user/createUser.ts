@@ -16,7 +16,7 @@ export const createUser = async (
         const responseData: StoreData = {
             _id: user._id,
             name: user.name,
-            email : user.email
+            email : user.email,
           };
         return responseData;
     } catch (error) {

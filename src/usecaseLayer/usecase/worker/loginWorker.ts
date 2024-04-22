@@ -4,7 +4,7 @@ import { IRequestValidator } from "../../interface/repository/IvalidareRepositor
 import { IWorkerRepository } from "../../interface/repository/IworekerRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { IResponse, StoreData } from "../../interface/services/Iresponse";
+import { IResponse, workerResponseData } from "../../interface/services/Iresponse";
 
 export const loginWorker = async (
   requestValidator: IRequestValidator,
@@ -50,10 +50,12 @@ export const loginWorker = async (
           worker.name
         );
 
-        const responseData: StoreData = {
+        const responseData: workerResponseData = {
           _id: worker._id,
           name: worker.name,
           email: worker.email,
+          img:worker.profile_img,
+          joinDate:worker.createdAt 
         };
 
         return {

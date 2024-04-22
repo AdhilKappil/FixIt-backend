@@ -8,7 +8,12 @@ import { IWorker } from "../../../domainLayer/worker";
 export interface StoreData {
   _id: string;
   name: string;
-  email : string
+  email : string,
+}
+
+export interface workerResponseData extends StoreData{
+  img? : string,
+  joinDate? : Date
 }
 
 export interface RequesEmailData {

@@ -9,18 +9,20 @@ export const createService = async (
   requestValidator: IRequestValidator,
   serviceRepository: IServiceRepository,
   serviceName: string,
-  // firstHourCharge: number,
-  // laterHourCharge: number,
+  firstHourCharge: number,
+  laterHourCharge: number,
   description: string,
   service_img: string
 ): Promise<string> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { serviceName, description, service_img },
+      { serviceName, description, service_img,firstHourCharge,laterHourCharge },
       [
         "serviceName",
         "description",
+        "firstHourCharge",
+        "laterHourCharge",
         "service_img",
       ]
     );
@@ -34,6 +36,8 @@ export const createService = async (
       const newService = {
         serviceName,
         description,
+        firstHourCharge,
+        laterHourCharge,
         service_img,
       };
       const createnewService = await serviceRepository.createService(newService);

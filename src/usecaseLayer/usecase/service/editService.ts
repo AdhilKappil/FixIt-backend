@@ -11,17 +11,21 @@ export const editService = async (
   _id : string,
   serviceName: string,
   description: string,
+  firstHourCharge:number,
+  laterHourCharge:number,
   isBlocked : boolean
 //   service_img: string
 ): Promise<string> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { _id,serviceName, description,isBlocked },
+      { _id,serviceName, description,firstHourCharge,laterHourCharge,isBlocked},
       [
         "_id",
         "serviceName",
         "description",
+        "firstHourCharge",
+        "laterHourCharge",
         "isBlocked"
       ]
     );
@@ -35,6 +39,8 @@ export const editService = async (
       const updateService = {
         serviceName,
         description,
+        firstHourCharge,
+        laterHourCharge,
         isBlocked,
         _id
         // service_img,

@@ -5,6 +5,8 @@ const serviceSchema: Schema = new Schema<IService & Document>(
   {
     serviceName: { type: String, required: true, unique:true},
     description: { type: String, required: true },
+    firstHourCharge: { type: Number, required: true },
+    laterHourCharge: { type: Number, required: true },
     service_img: { type: String, required:true},
     isBlocked: { type: Boolean, default: false },
   },

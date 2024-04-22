@@ -31,8 +31,8 @@ export class WorkerUseCase {
     mobile,
     email,
     password,
-    firstHourCharge,
-    laterHourCharge,
+    // firstHourCharge,
+    // laterHourCharge,
     district,
     service,
     experience,
@@ -43,8 +43,8 @@ export class WorkerUseCase {
     mobile : string
     email: string;
     password: string;
-    firstHourCharge : number;
-    laterHourCharge : number;
+    // firstHourCharge : number;
+    // laterHourCharge : number;
     district : string;
     service : string;
     experience : number;
@@ -59,8 +59,8 @@ export class WorkerUseCase {
       mobile,
       email,
       password,
-      firstHourCharge,
-      laterHourCharge,
+      // firstHourCharge,
+      // laterHourCharge,
       district,
       service,
       experience,

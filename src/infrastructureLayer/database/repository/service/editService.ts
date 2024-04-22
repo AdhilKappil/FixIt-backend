@@ -11,6 +11,8 @@ export const editService = async (
         if (service) {
            service.serviceName = updateService.serviceName
            service.description = updateService.description
+           service.firstHourCharge = updateService.firstHourCharge
+           service.laterHourCharge = updateService.laterHourCharge
            service.isBlocked = updateService.isBlocked
            await service.save();
            return "Successfully updated service";
