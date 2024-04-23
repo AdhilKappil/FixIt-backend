@@ -2,6 +2,7 @@ import { IUser } from "../../../domainLayer/user";
 import { IUserRepository } from "../../../usecaseLayer/interface/repository/IuserRepository";
 import {  IforgotPassword } from "../../../usecaseLayer/interface/services/Iresponse";
 import UserModel from "../model/userModel";
+import { addProfile } from "./user/addProfile";
 import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";
 import { findUser } from "./user/findUser";
@@ -25,6 +26,11 @@ export class UserRepository implements IUserRepository {
   // admin can block user
   async blockUser(_id: string): Promise<string | null> {
     return blockUser(_id,this.usersModel)
+  }
+
+   // admin can block user
+   async addProfile(profile_img:string,_id: string): Promise<IUser | never> {
+    return addProfile(_id,profile_img,this.usersModel)
   }
 
   // Create new user

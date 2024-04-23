@@ -4,6 +4,7 @@ import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import IHashpassword from "../interface/services/Ihashpassword";
 import Ijwt from "../interface/services/Ijwt";
 import INodemailer from "../interface/services/Inodemailer";
+import { addProfile } from "./user/addProfile";
 import { createUser } from "./user/createUser";
 import { emailVeification } from "./user/emailVerification";
 import { forgotPassword } from "./user/forgotPassword";
@@ -56,6 +57,23 @@ export class UserUseCase {
       mobile,
       email,
       password
+    );
+  }
+
+
+  //to create user
+  async addProfile({
+     profile_img,
+     _id,
+  }: {
+  profile_img : string,
+  _id : string
+  }) {
+    return addProfile(
+      this.requestValidator,
+      this.userRepository,
+      profile_img,
+      _id
     );
   }
 

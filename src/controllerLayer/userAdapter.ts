@@ -80,6 +80,24 @@ export class UserAdapter {
   }
 
 
+    // @desc  Update User 
+  //route     Pur api/user/UpdateProfile
+  //@access   Public
+  async addProfile(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.userusecase.addProfile(req.body);
+      user &&
+      res.status(user.status).json({
+        success: user.success,
+        message: user.message,
+        user: user.data,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   // @desc  send ottp to new user email
   //route     POST api/user/sendEmail
   //@access   Public
