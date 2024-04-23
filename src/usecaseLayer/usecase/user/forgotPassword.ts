@@ -4,7 +4,7 @@ import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { IResponse } from "../../interface/services/Iresponse";
+import {  IUserResponse } from "../../interface/services/Iresponse";
 
 
 export const forgotPassword = async (
@@ -14,7 +14,7 @@ export const forgotPassword = async (
   jwt : Ijwt,
   email: string,
   password: string
-): Promise<IResponse> => {
+): Promise<IUserResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(

@@ -3,7 +3,7 @@ import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { IResponse, StoreData } from "../../interface/services/Iresponse";
+import {  IUserResponse,  } from "../../interface/services/Iresponse";
 
 
 export const googleAuth = async (
@@ -14,7 +14,7 @@ export const googleAuth = async (
   name: string,
   email: string,
   password: string
-): Promise<IResponse> => {
+): Promise<IUserResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -52,18 +52,14 @@ export const googleAuth = async (
           throw ErrorResponse.badRequest("You account is blocked");
         }
           const token = jwt.createJWT(user._id, user.email, "user", user.name);
-  
-          const responseData: StoreData = {
-            _id: user._id,
-            name: user.name,
-            email : user.email
-          };
+
+          user.password = ""
   
           return {
             status: 200,
             success: true,
             token: token,
-            data:responseData,
+            data:user,
             message: `Login successful. Welcome ${user.name}`,
           };
         }  

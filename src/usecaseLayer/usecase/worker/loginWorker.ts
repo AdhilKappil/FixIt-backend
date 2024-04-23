@@ -4,7 +4,7 @@ import { IRequestValidator } from "../../interface/repository/IvalidareRepositor
 import { IWorkerRepository } from "../../interface/repository/IworekerRepository";
 import IHashpassword from "../../interface/services/Ihashpassword";
 import Ijwt from "../../interface/services/Ijwt";
-import { IResponse, workerResponseData } from "../../interface/services/Iresponse";
+import {  IWorkerResponse } from "../../interface/services/Iresponse";
 
 export const loginWorker = async (
   requestValidator: IRequestValidator,
@@ -13,7 +13,7 @@ export const loginWorker = async (
   jwt: Ijwt,
   email: string,
   password: string
-): Promise<IResponse> => {
+): Promise<IWorkerResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -50,19 +50,13 @@ export const loginWorker = async (
           worker.name
         );
 
-        const responseData: workerResponseData = {
-          _id: worker._id,
-          name: worker.name,
-          email: worker.email,
-          img:worker.profile_img,
-          joinDate:worker.createdAt 
-        };
+        worker.password = ""
 
         return {
           status: 200,
           success: true,
           token: token,
-          data: responseData,
+          data: worker,
           message: `Login successful. Welcome ${worker.name}`,
         };
       }

@@ -1,6 +1,6 @@
 import { IUser } from "../../../domainLayer/user";
 import { IUserRepository } from "../../../usecaseLayer/interface/repository/IuserRepository";
-import { IforgotPassword, StoreData } from "../../../usecaseLayer/interface/services/Iresponse";
+import {  IforgotPassword } from "../../../usecaseLayer/interface/services/Iresponse";
 import UserModel from "../model/userModel";
 import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";
@@ -13,7 +13,7 @@ export class UserRepository implements IUserRepository {
   constructor(private readonly usersModel: typeof UserModel) {}
 
   // Create new user
-  async createUser(newUser: IUser): Promise<StoreData> {
+  async createUser(newUser: IUser): Promise<IUser> {
     return createUser(newUser, this.usersModel);
   }
 
@@ -28,7 +28,7 @@ export class UserRepository implements IUserRepository {
   }
 
   // Create new user
-  async forgotPassword(newPassword: IforgotPassword): Promise<StoreData> {
+  async forgotPassword(newPassword: IforgotPassword): Promise<IUser> {
     return forgotPassword(newPassword, this.usersModel);
   }
 

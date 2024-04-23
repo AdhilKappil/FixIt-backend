@@ -1,4 +1,3 @@
-import { IAdmin } from "../../../domainLayer/admin";
 import { IService } from "../../../domainLayer/service";
 import { IUser } from "../../../domainLayer/user";
 import { IWorker } from "../../../domainLayer/worker";
@@ -11,10 +10,16 @@ export interface StoreData {
   email : string,
 }
 
-export interface workerResponseData extends StoreData{
-  img? : string,
-  joinDate? : Date
-}
+// export interface IresponseUserData extends StoreData{
+//   profile_img : string,
+//   mobile : string
+//   createdAt : Date
+// }
+
+// export interface workerResponseData extends StoreData{
+//   img? : string,
+//   joinDate? : Date
+// }
 
 export interface RequesEmailData {
   name : string;

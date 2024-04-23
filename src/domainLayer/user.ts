@@ -6,5 +6,6 @@ export interface IUser {
   password: string;
   profile_img?: string;
   isBlocked?: boolean;
+  createdAt?:Date
 }
 
