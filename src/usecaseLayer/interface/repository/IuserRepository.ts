@@ -8,4 +8,5 @@ export interface IUserRepository {
   blockUser(_id: string): Promise<string | null>;
   forgotPassword(newPassword:IforgotPassword): Promise<IUser>;
   addProfile(profile_img:string,_id:string): Promise<IUser | never>;
+  updateProfile(data:Record<string,string>): Promise<IUser>;
 }

@@ -7,6 +7,7 @@ import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";
 import { findUser } from "./user/findUser";
 import { forgotPassword } from "./user/forgotPassword";
+import { updateProfile } from "./user/updateProfile";
 
 
 // This class for exporting all the single DB operations togethor 
@@ -31,6 +32,12 @@ export class UserRepository implements IUserRepository {
    // admin can block user
    async addProfile(profile_img:string,_id: string): Promise<IUser | never> {
     return addProfile(_id,profile_img,this.usersModel)
+  }
+
+  
+   // admin can block user
+   async updateProfile(data:Record<string,string>): Promise<IUser | never> {
+    return updateProfile(data,this.usersModel)
   }
 
   // Create new user

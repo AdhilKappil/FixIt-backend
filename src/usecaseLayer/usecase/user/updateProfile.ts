@@ -4,17 +4,18 @@ import { IRequestValidator } from "../../interface/repository/IvalidareRepositor
 import {  IUserResponse } from "../../interface/services/Iresponse";
 
 
-export const addProfile = async (
+export const updateProfile = async (
   requestValidator: IRequestValidator,
   userRepository: IUserRepository,
-  profile_img:string,
-  _id:string
+  _id:string,
+  name : string,
+  mobile : string,
 ): Promise<IUserResponse> => {
   try {
     
     const validation = requestValidator.validateRequiredFields(
-      {profile_img,_id },
-      [ "profile_img", "_id"]
+      {_id,name,mobile},
+      ["_id","name","mobile"]
     );
 
     if (!validation.success) {
@@ -23,12 +24,17 @@ export const addProfile = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-      const updatedUser = await userRepository.addProfile(profile_img,_id);
+    const data = {
+        _id,
+        name,
+        mobile
+    }
+      const updatedUser = await userRepository.updateProfile(data);
       
       return {
         status: 200,
         success: true,
-        message: `Successfully Uploaded Profile Image`,
+        message: `Successfully Uploaded Profile `,
         data : updatedUser
       };
     

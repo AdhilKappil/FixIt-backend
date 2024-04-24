@@ -10,16 +10,6 @@ export interface StoreData {
   email : string,
 }
 
-// export interface IresponseUserData extends StoreData{
-//   profile_img : string,
-//   mobile : string
-//   createdAt : Date
-// }
-
-// export interface workerResponseData extends StoreData{
-//   img? : string,
-//   joinDate? : Date
-// }
 
 export interface RequesEmailData {
   name : string;

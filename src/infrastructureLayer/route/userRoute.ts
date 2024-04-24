@@ -23,9 +23,14 @@ router.post("/logout", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.logoutUser(req, res, next)
 );
 
-// Route for update user data
+// Route for add profile
 router.patch("/addProfile", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.addProfile(req, res, next)
+);
+
+// Route for update user data
+router.patch("/updateProfile", (req: Request, res: Response, next: NextFunction) =>
+  userAdapter.updateProfile(req, res, next)
 );
 
 //routes for forgot password otp verification

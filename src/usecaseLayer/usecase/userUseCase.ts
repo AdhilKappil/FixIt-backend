@@ -12,6 +12,7 @@ import { googleAuth } from "./user/googleAuth";
 import { loginUser } from "./user/loginUser";
 import { verifyEmail } from "./user/sendEmail";
 import { sendOtpFogotPassword } from "./user/sendOtpForgotPassword";
+import { updateProfile } from "./user/updateProfile";
 
 
 export class UserUseCase {
@@ -61,7 +62,7 @@ export class UserUseCase {
   }
 
 
-  //to create user
+  //to add pfofile image
   async addProfile({
      profile_img,
      _id,
@@ -74,6 +75,25 @@ export class UserUseCase {
       this.userRepository,
       profile_img,
       _id
+    );
+  }
+
+  //to update profile
+  async updateProfile({
+     _id,
+     name,
+     mobile
+  }: {
+  _id : string,
+  name : string,
+  mobile : string
+  }) {
+    return updateProfile(
+      this.requestValidator,
+      this.userRepository,
+      _id,
+      name,
+      mobile
     );
   }
 

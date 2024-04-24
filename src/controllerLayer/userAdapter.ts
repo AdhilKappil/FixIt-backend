@@ -80,12 +80,30 @@ export class UserAdapter {
   }
 
 
-    // @desc  Update User 
-  //route     Pur api/user/UpdateProfile
-  //@access   Public
+    // @desc  Add user img 
+  //route     Patch api/user/UpdateProfile
+  //@access   Private
   async addProfile(req: Req, res: Res, next: Next) {
     try {
       const user = await this.userusecase.addProfile(req.body);
+      user &&
+      res.status(user.status).json({
+        success: user.success,
+        message: user.message,
+        user: user.data,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+    // @desc  Update User 
+  //route     Patch api/user/UpdateProfile
+  //@access   Private
+  async updateProfile(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.userusecase.updateProfile(req.body);
       user &&
       res.status(user.status).json({
         success: user.success,
