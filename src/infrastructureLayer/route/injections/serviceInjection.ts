@@ -12,4 +12,4 @@ const serviceusecase = new ServiceUseCase(serviceRepository, requestValidator);
 const serviceAdapter = new ServiceAdapter(serviceusecase);
 
 
-export { serviceAdapter, serviceusecase };
+export { serviceAdapter };

@@ -31,4 +31,4 @@ const adminusecase = new AdminUseCase(
 );
 const adminAdapter = new AdminAdapter(adminusecase);
 
-export { adminAdapter, adminusecase };
+export { adminAdapter };
