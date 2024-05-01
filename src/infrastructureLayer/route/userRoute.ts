@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import { userAdapter } from "./injections/userInjection";
+import { bookingAdapter } from "./injections/bookingInjection";
 
 const router = express.Router();
 
@@ -54,6 +55,13 @@ router.post("/sendEmail", (req: Request, res: Response, next: NextFunction) =>
 
 router.post("/verifyEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.emailVerification(req, res, next)
+);
+
+// ======= Service booking related routes =========== //
+
+// For book service
+router.post("/bookService", (req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.bookService(req, res, next)
 );
 
 export default router;

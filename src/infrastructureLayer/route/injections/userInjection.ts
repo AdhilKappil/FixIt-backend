@@ -25,4 +25,4 @@ const userusecase = new UserUseCase(
 );
 const userAdapter = new UserAdapter(userusecase);
 
-export { userAdapter, userRepository };
+export { userAdapter };
