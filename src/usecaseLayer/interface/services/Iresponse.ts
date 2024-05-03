@@ -1,3 +1,4 @@
+import { IBooking } from "../../../domainLayer/booking";
 import { IService } from "../../../domainLayer/service";
 import { IUser } from "../../../domainLayer/user";
 import { IWorker } from "../../../domainLayer/worker";
@@ -35,6 +36,14 @@ export interface IUserResponse<T = IUser| IUser[]|string> {
 
 
 export interface ServiceResponse<T = IService| IService[]|string> {
+  status: number;
+  success: boolean;
+  message?: string;
+  data?: T;
+}
+
+// for booking response
+export interface BookingResponse<T = IBooking| IBooking[]|string> {
   status: number;
   success: boolean;
   message?: string;

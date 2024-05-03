@@ -1,6 +1,7 @@
 import { IBookingRepository } from "../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { bookService } from "./booking/bookService";
+import { getBokkings } from "./booking/getBookings";
 
 export class BookingUseCase {
   private readonly userRepository: IBookingRepository;
@@ -14,10 +15,11 @@ export class BookingUseCase {
     this.requestValidator = requestValidator;
   }
 
-  //to create user
+  //to book service
   async bookService({
     userId,
     service,
+    serviceImg,
     description,
     date,
     startTime,
@@ -27,6 +29,7 @@ export class BookingUseCase {
   }: {
     userId: string;
     service: string;
+    serviceImg:string;
     description: string;
     date: string;
     startTime: string;
@@ -39,6 +42,7 @@ export class BookingUseCase {
       this.userRepository,
       userId,
       service,
+      serviceImg,
       description,
       date,
       startTime,
@@ -47,4 +51,22 @@ export class BookingUseCase {
       longitude
     );
   }
+
+
+  //to get bookings
+  async getBookings({
+    userId,
+    status
+  }: {
+    userId: string;
+    status : string
+  }) {
+    return getBokkings(
+      this.requestValidator,
+      userId,
+      status
+    );
+  }
+
+
 }

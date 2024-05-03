@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { userAdapter } from "./injections/userInjection";
 import { bookingAdapter } from "./injections/bookingInjection";
+import AuthMiddleware from "../Middleware/authMiddleware";
 
 const router = express.Router();
 
@@ -25,12 +26,14 @@ router.post("/logout", (req: Request, res: Response, next: NextFunction) =>
 );
 
 // Route for add profile
-router.patch("/addProfile", (req: Request, res: Response, next: NextFunction) =>
+router.patch("/addProfile",AuthMiddleware.protectUser,
+ (req: Request, res: Response, next: NextFunction) =>
   userAdapter.addProfile(req, res, next)
 );
 
 // Route for update user data
-router.patch("/updateProfile", (req: Request, res: Response, next: NextFunction) =>
+router.patch("/updateProfile",AuthMiddleware.protectUser,
+ (req: Request, res: Response, next: NextFunction) =>
   userAdapter.updateProfile(req, res, next)
 );
 
@@ -60,8 +63,15 @@ router.post("/verifyEmail", (req: Request, res: Response, next: NextFunction) =>
 // ======= Service booking related routes =========== //
 
 // For book service
-router.post("/bookService", (req: Request, res: Response, next: NextFunction) =>
+router.post("/bookService",AuthMiddleware.protectUser,
+ (req: Request, res: Response, next: NextFunction) =>
   bookingAdapter.bookService(req, res, next)
+);
+
+// For get bookings
+router.get("/getBookings",AuthMiddleware.protectUser,
+ (req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.getBookings(req, res, next)
 );
 
 export default router;

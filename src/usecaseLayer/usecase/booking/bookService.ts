@@ -8,6 +8,7 @@ export const bookService = async (
   bokkingRepository: IBookingRepository,
   userId: string,
   service: string,
+  serviceImg:string,
   description: string,
   date: string,
   startTime: string,
@@ -18,8 +19,8 @@ export const bookService = async (
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { userId,service,description,date,startTime,endTime,latitude,longitude },
-      [ "userId","service", "description", "date", "startTime", "endTime", "latitude", "longitude"]
+      { userId,service,serviceImg, description,date,startTime,endTime,latitude,longitude },
+      [ "userId","service","serviceImg", "description", "date", "startTime", "endTime", "latitude", "longitude"]
     );
 
     if (!validation.success) {
@@ -29,6 +30,7 @@ export const bookService = async (
     const newOrder = {
         userId,
         service,
+        serviceImg,
         description,
         date,
         startTime,

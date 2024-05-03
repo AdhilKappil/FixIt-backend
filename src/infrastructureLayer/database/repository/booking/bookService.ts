@@ -9,7 +9,7 @@ export const bookService = async (
   try {
     const user = await bookingModel.create(newOrder);
     await user.save();
-    return "Your booking has been successfully completed and is now in progress. Please wait patiently for confirmation from the worker. Thank you for choosing our service!";
+    return "Please wait patiently for confirmation from the worker. Thank you for choosing our service!";
   } catch (error) {
     throw error;
   }
