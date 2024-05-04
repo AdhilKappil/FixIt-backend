@@ -6,6 +6,8 @@ import { IUser } from '../../domainLayer/user';
 import { IAdmin } from '../../domainLayer/admin';
 import UserModel from '../database/model/userModel';
 import AdminModel from '../database/model/adminModel';
+import { WorkerRepository } from '../database/repository/workerRepository';
+import WorkerModel from '../database/model/workerModel';
 
 // Augment the express Request type to include a user property
 declare global {
@@ -80,6 +82,38 @@ class AuthMiddleware {
       res.status(401).send('Not authorized, no token');
     }
   }
+
+  // worker authentication
+  static async protectWorker(req: Request, res: Response, next: NextFunction): Promise<void> {
+    let token: string | undefined;
+
+    console.log('Worker protect');
+    token = req.cookies.workerjwt;
+
+    const workerRepository = new WorkerRepository(WorkerModel)
+
+    if (token) {
+      try {
+        const decoded: any = jwt.verify(token, process.env.JWT_KEY as string);
+        const worker = await workerRepository.findWorker(decoded.email);
+        if (worker) {
+          req.user = worker;
+          console.log('before next');
+          next();
+        } else {
+          console.error('Admin not found');
+          res.status(404).send('Admin not found');
+        }
+      } catch (error) {
+        console.error(error);
+        res.status(401).send('Not authorized, no token');
+      }
+    } else {
+      console.log('No token');
+      res.status(401).send('Not authorized, no token');
+    }
+  }
+
 }
 
 export default AuthMiddleware;

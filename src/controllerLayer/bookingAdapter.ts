@@ -35,7 +35,9 @@ export class BookingAdapter {
     try {
       const userId = req.query.userId as string;
       const status = req.query.status as string;
-      const bookings = await this.bookingusecase.getBookings({userId,status});
+      const workerId = req.query.workerId as string
+      const service = req.query.service as string
+      const bookings = await this.bookingusecase.getBookings({userId,status,workerId,service});
       bookings &&
       res.status(bookings.status).json({
         success: bookings.success,

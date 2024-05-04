@@ -56,15 +56,21 @@ export class BookingUseCase {
   //to get bookings
   async getBookings({
     userId,
-    status
+    status,
+    workerId,
+    service
   }: {
     userId: string;
-    status : string
+    status: string;
+    workerId: string;
+    service: string
   }) {
     return getBokkings(
       this.requestValidator,
       userId,
-      status
+      status,
+      workerId,
+      service
     );
   }
 

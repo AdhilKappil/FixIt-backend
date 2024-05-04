@@ -7,13 +7,15 @@ import { BookingResponse, IResponse } from "../../interface/services/Iresponse";
 export const getBokkings = async (
   requestValidator: IRequestValidator,
   userId: string,
-  status: string
+  status: string,
+  workerId : string,
+  service : string
 ): Promise<BookingResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { userId,status },
-      [ "userId","status"]
+      { userId,status,workerId,service },
+      [ "userId","status","workerId","service"]
     );
 
     if (!validation.success) {
@@ -21,6 +23,24 @@ export const getBokkings = async (
     }
 
     console.log(`userId${userId} " " status${status}`);
+
+    if(workerId){
+      const booking = await BookingModel.find({workerId,status})
+      return {
+          status: 200,
+          success: true,
+          data: booking
+        };
+    }
+
+    if(service){
+      const booking = await BookingModel.find({service})
+      return {
+          status: 200,
+          success: true,
+          data: booking
+        };
+    }
 
     if(status = "all"){
         const booking = await BookingModel.find({userId})

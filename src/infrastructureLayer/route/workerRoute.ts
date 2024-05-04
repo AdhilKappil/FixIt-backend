@@ -1,6 +1,8 @@
 
 import express, { NextFunction, Request, Response } from "express";
 import { workerAdapter } from "./injections/workerInjection";
+import AuthMiddleware from "../Middleware/authMiddleware";
+import { bookingAdapter } from "./injections/bookingInjection";
 
 const router = express.Router();
 
@@ -12,11 +14,19 @@ router.post(
       workerAdapter.createWorker(req, res, next)
   );
 
-  // route for user login
+  // route for worker login
 router.post(
   "/login",
   (req: Request, res: Response, next: NextFunction) =>
     workerAdapter.loginWorker(req, res, next)
+);
+
+// ============== Booking related routes =============== //
+
+// For get bookings
+router.get("/getBookings",AuthMiddleware.protectWorker,
+ (req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.getBookings(req, res, next)
 );
 
 // // Route for user logout
