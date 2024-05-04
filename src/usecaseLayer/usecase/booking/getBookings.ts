@@ -1,8 +1,7 @@
 import BookingModel from "../../../infrastructureLayer/database/model/bookingModel";
 import ErrorResponse from "../../handler/errorResponse";
-import { IBookingRepository } from "../../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
-import { BookingResponse, IResponse } from "../../interface/services/Iresponse";
+import { BookingResponse } from "../../interface/services/Iresponse";
 
 export const getBokkings = async (
   requestValidator: IRequestValidator,
@@ -22,9 +21,8 @@ export const getBokkings = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-    console.log(`userId${userId} " " status${status}`);
-
     if(workerId){
+      
       const booking = await BookingModel.find({workerId,status})
       return {
           status: 200,
@@ -34,7 +32,7 @@ export const getBokkings = async (
     }
 
     if(service){
-      const booking = await BookingModel.find({service})
+      const booking = await BookingModel.find({service,status})
       return {
           status: 200,
           success: true,

@@ -1,17 +1,18 @@
 import { IBookingRepository } from "../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { bookService } from "./booking/bookService";
+import { commitWork } from "./booking/commitWork";
 import { getBokkings } from "./booking/getBookings";
 
 export class BookingUseCase {
-  private readonly userRepository: IBookingRepository;
+  private readonly bookingRepository: IBookingRepository;
   private readonly requestValidator: IRequestValidator;
 
   constructor(
-    userRepository: IBookingRepository,
+    bookingRepository: IBookingRepository,
     requestValidator: IRequestValidator
   ) {
-    this.userRepository = userRepository;
+    this.bookingRepository = bookingRepository;
     this.requestValidator = requestValidator;
   }
 
@@ -39,7 +40,7 @@ export class BookingUseCase {
   }) {
     return bookService(
       this.requestValidator,
-      this.userRepository,
+      this.bookingRepository,
       userId,
       service,
       serviceImg,
@@ -71,6 +72,26 @@ export class BookingUseCase {
       status,
       workerId,
       service
+    );
+  }
+
+
+  //to commit work
+  async commitWork({
+    workerId,
+    status,
+    _id
+  }: {
+    workerId: string;
+    status: string;
+    _id: string
+  }) {
+    return commitWork(
+      this.requestValidator,
+      this.bookingRepository,
+      workerId,
+      status,
+      _id
     );
   }
 

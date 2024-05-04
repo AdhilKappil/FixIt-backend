@@ -50,4 +50,23 @@ export class BookingAdapter {
   }
 
 
+     // @desc Commit new Work
+  //route     PATCH /api/worker/commitWork
+  //@access   Private
+  async commitWork(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.bookingusecase.commitWork(req.body)
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          data: user.data,
+          message: user.message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+
 }

@@ -60,6 +60,7 @@ router.post("/verifyEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.emailVerification(req, res, next)
 );
 
+
 // ======= Service booking related routes =========== //
 
 // For book service
