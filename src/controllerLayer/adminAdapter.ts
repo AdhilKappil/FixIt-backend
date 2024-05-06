@@ -13,19 +13,18 @@ export class AdminAdapter {
   //@access   Public
   async loginAdmin(req: Req, res: Res, next: Next) {
     try {
-      const user = await this.adminusecase.loginAdmin(req.body);
-
-      user &&
-        res.cookie("adminjwt", user.token, {
+      const admin = await this.adminusecase.loginAdmin(req.body);
+      admin &&
+        res.cookie("adminjwt", admin.token, {
           httpOnly: true,
           sameSite: "strict", // Prevent CSRF attacks
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
 
-      res.status(user.status).json({
-        success: user.success,
-        data: user.data,
-        message: user.message,
+      res.status(admin.status).json({
+        success: admin.success,
+        data: admin.data,
+        message: admin.message,
       });
     } catch (err) {
       next(err);

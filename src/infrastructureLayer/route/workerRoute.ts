@@ -29,6 +29,12 @@ router.get("/getBookings",AuthMiddleware.protectWorker,
   bookingAdapter.getBookings(req, res, next)
 );
 
+// For commit work
+router.patch("/commitWork",AuthMiddleware.protectWorker,
+ (req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.commitWork(req, res, next)
+);
+
 // // Route for user logout
 // router.post(
 //   "/logout",

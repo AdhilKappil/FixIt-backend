@@ -60,6 +60,7 @@ router.post("/verifyEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.emailVerification(req, res, next)
 );
 
+
 // ======= Service booking related routes =========== //
 
 // For book service
@@ -72,6 +73,12 @@ router.post("/bookService",AuthMiddleware.protectUser,
 router.get("/getBookings",AuthMiddleware.protectUser,
  (req: Request, res: Response, next: NextFunction) =>
   bookingAdapter.getBookings(req, res, next)
+);
+
+// For commit work
+router.patch("/cancelBooking",AuthMiddleware.protectUser,
+ (req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.commitWork(req, res, next)
 );
 
 export default router;
