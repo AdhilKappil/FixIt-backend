@@ -75,4 +75,10 @@ router.get("/getBookings",AuthMiddleware.protectUser,
   bookingAdapter.getBookings(req, res, next)
 );
 
+// For commit work
+router.patch("/cancelBooking",AuthMiddleware.protectUser,
+ (req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.commitWork(req, res, next)
+);
+
 export default router;

@@ -13,10 +13,16 @@ export const commitWork = async (
     
     const order = await bookingModel.findOne({_id})
     if(order){
-        order.status = status
-        order.workerId = workerId
-        await order.save()
-        return "Successfully commited the work"
+        if(status === "cancelled"){
+          order.status = status
+          await order.save()
+          return "Successfully cancelled the booking"
+        }else{
+          order.status = status
+          order.workerId = workerId
+          await order.save()
+          return "Successfully commited the work"
+        }
     }else{
         return "Something is went wrong"
     }

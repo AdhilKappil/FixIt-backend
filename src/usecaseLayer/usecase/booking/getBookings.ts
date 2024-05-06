@@ -20,9 +20,9 @@ export const getBokkings = async (
     if (!validation.success) {
       throw ErrorResponse.badRequest(validation.message as string);
     }
+    
 
-    if(workerId){
-      
+    if(workerId){   
       const booking = await BookingModel.find({workerId,status})
       return {
           status: 200,
@@ -40,15 +40,18 @@ export const getBokkings = async (
         };
     }
 
-    if(status = "all"){
-        const booking = await BookingModel.find({userId})
-        return {
-            status: 200,
-            success: true,
-            data: booking
-          };
+    if(status === "all"){
+      const booking = await BookingModel.find({ userId, status: { $ne: "cancelled" } });
+      return {
+          status: 200,
+          success: true,
+          data: booking
+      };
+      
     }else{
         const booking = await BookingModel.find({userId, status})
+        console.log(status,"yes it is");
+        
         return {
             status: 200,
             success: true,
