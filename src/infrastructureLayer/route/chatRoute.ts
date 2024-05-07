@@ -10,5 +10,18 @@ router.post(
       chatAdapter.createConversation(req, res, next)
   );
 
+// route for create message  
+router.post(
+    "/message",
+    (req: Request, res: Response, next: NextFunction) =>
+      chatAdapter.(req, res, next)
+  );
+
+// router.get(
+//     "/conversation",
+//     (req: Request, res: Response, next: NextFunction) =>
+//       chatAdapter.createConversation(req, res, next)
+//   );
+
 
 export default router  

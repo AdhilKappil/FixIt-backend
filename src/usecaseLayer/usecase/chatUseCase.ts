@@ -15,7 +15,7 @@ export class ChatUseCase {
     this.requestValidator = requestValidator;
   }
 
-  //to create service
+  //to create conversation
   async createConversation({
     senderId,
     receiverId
@@ -30,6 +30,43 @@ export class ChatUseCase {
       receiverId
     );
   }
+
+
+  //to create createMessage
+  async createMessage({
+    conversationId,
+    senderId,
+    text
+  }: {
+    conversationId:string
+    senderId : string,
+    text: string
+  }) {
+    return createMessage(
+      this.requestValidator,
+      this.chatRepository,
+      conversationId,
+      senderId,
+      text
+    );
+  }
+
+
+  // //to create service
+  // async getConversation({
+  //   senderId,
+  //   receiverId
+  // }: {
+  //   senderId : string,
+  //   receiverId: string
+  // }) {
+  //   return getConversation(
+  //     this.requestValidator,
+  //     this.chatRepository,
+  //     senderId,
+  //     receiverId
+  //   );
+  // }
 
 
 

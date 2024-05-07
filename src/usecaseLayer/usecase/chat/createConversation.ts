@@ -1,6 +1,7 @@
 import ErrorResponse from "../../handler/errorResponse";
 import { IChatRepository } from "../../interface/repository/IchatRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
+import { ConversationResponse } from "../../interface/services/Iresponse";
 
 
 // create new conversation
@@ -10,7 +11,7 @@ export const createConversation = async (
   senderId: string,
   receiverId : string
 
-): Promise<string> => {
+): Promise<string | ConversationResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -31,7 +32,11 @@ export const createConversation = async (
       const createnewConversation = await chatRepository.createConversation(senderId,receiverId);
       return createnewConversation
     }
-    throw ErrorResponse.badRequest("Service already exist");
+    return {
+      status: 200,
+      success: true,
+      data: conversation,
+    };
   } catch (err) {
     throw err;
   }

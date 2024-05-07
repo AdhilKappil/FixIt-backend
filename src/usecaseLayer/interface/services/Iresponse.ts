@@ -1,4 +1,5 @@
 import { IBooking } from "../../../domainLayer/booking";
+import { IConversation } from "../../../domainLayer/conversation";
 import { IService } from "../../../domainLayer/service";
 import { IUser } from "../../../domainLayer/user";
 import { IWorker } from "../../../domainLayer/worker";
@@ -65,5 +66,12 @@ export interface IWorkerResponse<T = IWorker| IWorker[]|string> {
   token? : string
 }
 
+
+export interface ConversationResponse<T = IConversation| IConversation[]|string> {
+  status: number;
+  success: boolean;
+  message?: string;
+  data?: T;
+}
 
 
