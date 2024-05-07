@@ -1,6 +1,7 @@
 import { IChatRepository } from "../interface/repository/IchatRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { createConversation } from "./chat/createConversation";
+import { createMessage } from "./chat/createMessage";
 
 
 export class ChatUseCase {

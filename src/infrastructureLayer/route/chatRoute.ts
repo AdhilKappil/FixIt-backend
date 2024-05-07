@@ -14,7 +14,7 @@ router.post(
 router.post(
     "/message",
     (req: Request, res: Response, next: NextFunction) =>
-      chatAdapter.(req, res, next)
+      chatAdapter.createMessage(req, res, next)
   );
 
 // router.get(
