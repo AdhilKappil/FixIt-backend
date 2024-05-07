@@ -8,6 +8,7 @@ import userRouter from '../route/userRoute'
 import adminRouter from '../route/adminRoute';
 import errorHandler from '../../usecaseLayer/handler/errorHandler';
 import workerRouter from '../route/workerRoute';
+import chatRouter from '../route/chatRoute';
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(morgan('dev'))
 app.use("/api/user", userRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/worker", workerRouter);
+app.use("/api/chat", chatRouter);
 
 // error handler middleware
 app.use(errorHandler)

@@ -1,8 +1,8 @@
 
 import mongoose, { Document, Model, Schema } from "mongoose";
-import { IConversationSchema } from "../../../domainLayer/conversation";
+import { IConversation } from "../../../domainLayer/conversation";
 
-const conversationSchema: Schema = new Schema<IConversationSchema & Document>(
+const conversationSchema: Schema = new Schema<IConversation & Document>(
     {
         members: {
             type: [{ type: String }],
@@ -14,7 +14,7 @@ const conversationSchema: Schema = new Schema<IConversationSchema & Document>(
   }
 );
 
-const ConversationModel: Model<IConversationSchema & Document> = mongoose.model<IConversationSchema & Document>(
+const ConversationModel: Model<IConversation & Document> = mongoose.model<IConversation & Document>(
   "Conversation",
   conversationSchema
 );

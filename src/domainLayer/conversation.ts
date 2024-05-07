@@ -1,4 +1,4 @@
 
-export interface IConversationSchema {
+export interface IConversation{
     members : string[];
 }
