@@ -2,6 +2,7 @@ import { IChatRepository } from "../interface/repository/IchatRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { createConversation } from "./chat/createConversation";
 import { createMessage } from "./chat/createMessage";
+import { getMessage } from "./chat/getMessage";
 
 
 export class ChatUseCase {
@@ -49,6 +50,17 @@ export class ChatUseCase {
       conversationId,
       senderId,
       text
+    );
+  }
+
+
+  
+  //to create service
+  async getMessage(conversationId:string) {
+    return getMessage(
+      this.requestValidator,
+      this.chatRepository,
+      conversationId
     );
   }
 

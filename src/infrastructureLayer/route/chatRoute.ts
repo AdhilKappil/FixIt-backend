@@ -17,6 +17,13 @@ router.post(
       chatAdapter.createMessage(req, res, next)
   );
 
+// route for get all message
+router.get(
+    "/message",
+    (req: Request, res: Response, next: NextFunction) =>
+      chatAdapter.getMessage(req, res, next)
+  );
+
 // router.get(
 //     "/conversation",
 //     (req: Request, res: Response, next: NextFunction) =>

@@ -1,11 +1,13 @@
 import { IConversation } from "../../../domainLayer/conversation";
 import { IMessage } from "../../../domainLayer/message";
 import { IChatRepository } from "../../../usecaseLayer/interface/repository/IchatRepository";
+import { MessageResponse } from "../../../usecaseLayer/interface/services/Iresponse";
 import ConversationModel from "../model/conversation";
 import MessageModel from "../model/message";
 import { createConversation } from "./chat/createConversation";
 import { createMessage } from "./chat/createMessage";
 import { findConversation } from "./chat/findConversation";
+import { getMessage } from "./chat/getMessage";
 
 // This class for exporting all the single DB operations togethor
 export class ChatRepository implements IChatRepository {
@@ -30,8 +32,13 @@ export class ChatRepository implements IChatRepository {
     return findConversation(senderId, receiverId, this.conversationModel);
   }
 
-  // Create new user
+  // Create new message
   async createMessage(newMessage: IMessage): Promise<IMessage> {
     return createMessage(newMessage, this.messageModel);
   }
+  // get all message
+  async getMessage(conversationId: string): Promise<MessageResponse | null> {
+    return getMessage(conversationId, this.messageModel);
+  }
+
 }
