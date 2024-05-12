@@ -1,7 +1,7 @@
 import { IConversation } from "../../../domainLayer/conversation";
 import { IMessage } from "../../../domainLayer/message";
 import { IChatRepository } from "../../../usecaseLayer/interface/repository/IchatRepository";
-import { MessageResponse } from "../../../usecaseLayer/interface/services/Iresponse";
+import { IConversationData, MessageResponse } from "../../../usecaseLayer/interface/services/Iresponse";
 import ConversationModel from "../model/conversation";
 import MessageModel from "../model/message";
 import { createConversation } from "./chat/createConversation";
@@ -28,7 +28,7 @@ export class ChatRepository implements IChatRepository {
   async findConversation(
     senderId: string,
     receiverId: string
-  ): Promise<IConversation | null> {
+  ): Promise<IConversationData | undefined> {
     return findConversation(senderId, receiverId, this.conversationModel);
   }
 

@@ -68,7 +68,7 @@ export interface IWorkerResponse<T = IWorker| IWorker[]|string> {
 }
 
 
-export interface ConversationResponse<T = IConversation| IConversation[]|string> {
+export interface ConversationResponse<T = IConversationData| IConversationData[]|string> {
   status: number;
   success: boolean;
   message?: string;
@@ -83,4 +83,12 @@ export interface MessageResponse<T = IMessage|IMessage[]|string> {
   data?: T;
 }
 
-
+//
+export interface IConversationData {
+  _id: string;
+  members: string[];
+  user:string,
+  user_profile:string,
+  worker:string,
+  worker_profile:string
+}
