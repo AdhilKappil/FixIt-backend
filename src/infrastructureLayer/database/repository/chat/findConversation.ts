@@ -41,6 +41,7 @@ export const findConversation = async(
             _id: existingConversation._id,
             members: existingConversation.members,
             user: user?.name || '',
+            userEmail: user?.email || '',
             user_profile: user?.profile_img || '',
             worker: worker?.name || '',
             worker_profile: worker?.profile_img || ''

@@ -51,11 +51,14 @@ router.post(
     userAdapter.fogotPassword(req, res, next)
 );
 
-//routes for email verification and send otp to email
+// ========== routes for email verification =========
+
+// roure for send otp to email
 router.post("/sendEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.sendEmail(req, res, next)
 );
 
+// route for verify email 
 router.post("/verifyEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.emailVerification(req, res, next)
 );

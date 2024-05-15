@@ -120,6 +120,8 @@ export class UserAdapter {
   //route     POST api/user/sendEmail
   //@access   Public
   async sendEmail(req: Req, res: Res, next: Next) {
+    console.log('hello user');
+    
     try {
       const user = await this.userusecase.verifyEmail(req.body);
       res.status(user.status).json({

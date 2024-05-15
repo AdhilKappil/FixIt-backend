@@ -1,4 +1,3 @@
-import { IConversation } from "../../../domainLayer/conversation";
 import { IMessage } from "../../../domainLayer/message";
 import { IChatRepository } from "../../../usecaseLayer/interface/repository/IchatRepository";
 import { IConversationData, MessageResponse } from "../../../usecaseLayer/interface/services/Iresponse";

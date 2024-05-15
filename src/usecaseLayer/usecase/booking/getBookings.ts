@@ -50,7 +50,6 @@ export const getBokkings = async (
       
     }else{
         const booking = await BookingModel.find({userId, status})
-        console.log(status,"yes it is");
         
         return {
             status: 200,

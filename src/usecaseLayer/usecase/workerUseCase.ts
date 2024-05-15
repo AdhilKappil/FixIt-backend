@@ -1,25 +1,34 @@
+import { IUserRepository } from "../interface/repository/IuserRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { IWorkerRepository } from "../interface/repository/IworekerRepository";
 import IHashpassword from "../interface/services/Ihashpassword";
 import Ijwt from "../interface/services/Ijwt";
+import INodemailer from "../interface/services/Inodemailer";
 import { createWorker } from "./worker/createWorker";
 import { loginWorker } from "./worker/loginWorker";
+import { sendOtpToEmail } from "./worker/sendOtpToEmail";
 
 
 
 export class WorkerUseCase {
   private readonly workerRepository: IWorkerRepository;
+  private readonly userRepository: IUserRepository;
+  private readonly nodemailer: INodemailer;
   private readonly bcrypt: IHashpassword;
   private readonly jwt: Ijwt;
   private readonly requestValidator: IRequestValidator;
 
   constructor(
     workerRepository: IWorkerRepository,
+    userRepository:IUserRepository,
+    nodemailer : INodemailer,
     bcrypt: IHashpassword,
     jwt: Ijwt,
     requestValidator: IRequestValidator
   ) {
     this.workerRepository = workerRepository;
+    this.userRepository = userRepository;
+    this.nodemailer = nodemailer;
     this.bcrypt = bcrypt;
     this.jwt = jwt;
     this.requestValidator = requestValidator;
@@ -79,6 +88,11 @@ export class WorkerUseCase {
       email,
       password
     );
+  }
+
+  //to send OTP to verify the user's detail
+  async sendOtpToEmail({ email, name }: { email: string; name: string }) {
+    return sendOtpToEmail(this.requestValidator,this.userRepository, this.nodemailer, email, name);
   }
 
 }

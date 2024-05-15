@@ -50,6 +50,24 @@ export class WorkerAdapter {
   }
 
 
+  // @desc  send ottp to start work
+  //route     POST api/worker/sendOtpToEmail
+  //@access   Public
+  async sendOtpToEmail(req: Req, res: Res, next: Next) {
+    console.log('hello worker');
+    
+    try {
+      const user = await this.workerusecase.sendOtpToEmail(req.body);
+      res.status(user.status).json({
+        success: user.success,
+        message: user.message,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   // @desc    Logout user / clear cookie
   // @route   POST /api/user/logout
   // @access  Public

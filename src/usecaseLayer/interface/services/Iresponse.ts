@@ -1,5 +1,4 @@
 import { IBooking } from "../../../domainLayer/booking";
-import { IConversation } from "../../../domainLayer/conversation";
 import { IMessage } from "../../../domainLayer/message";
 import { IService } from "../../../domainLayer/service";
 import { IUser } from "../../../domainLayer/user";
@@ -88,6 +87,7 @@ export interface IConversationData {
   _id: string;
   members: string[];
   user:string,
+  userEmail:string,
   user_profile:string,
   worker:string,
   worker_profile:string

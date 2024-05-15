@@ -21,7 +21,7 @@ router.post(
     workerAdapter.loginWorker(req, res, next)
 );
 
-// ============== Booking related routes =============== //
+// ============== Work related routes =============== //
 
 // For get bookings
 router.get("/getBookings",AuthMiddleware.protectWorker,
@@ -33,6 +33,13 @@ router.get("/getBookings",AuthMiddleware.protectWorker,
 router.patch("/commitWork",AuthMiddleware.protectWorker,
  (req: Request, res: Response, next: NextFunction) =>
   bookingAdapter.commitWork(req, res, next)
+);
+
+// for start work otp verification
+router.post(
+  "/sendOtpToEmail",AuthMiddleware.protectWorker,
+  (req: Request, res: Response, next: NextFunction) =>
+    workerAdapter.sendOtpToEmail(req, res, next)
 );
 
 // // Route for user logout

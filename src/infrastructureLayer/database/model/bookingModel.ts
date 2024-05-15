@@ -13,7 +13,7 @@ const bookingSchema: Schema = new Schema<IBooking & Document>(
     endTime: { type: String, required: true },
     description: { type: String ,default:""},
     status: { type: String, default: "pending" },
-    price: { type: String, default:0 },
+    price: { type: Number, default:0 },
     payment:{type:Boolean, default: false},
     latitude: {type:Number, required: true},
     longitude: {type:Number, required: true}
