@@ -1,21 +1,25 @@
 import ErrorResponse from "../../handler/errorResponse";
+import { IBookingRepository } from "../../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import INodemailer from "../../interface/services/Inodemailer";
 import { IResponse } from "../../interface/services/Iresponse";
 
 
-export const emailVeification = async (
+export const emailVerification = async (
   requestValidator: IRequestValidator,
   nodemailer: INodemailer,
+  bookkingRepository : IBookingRepository,
   otp: string,
-  email: string
+  email: string,
+  bookingId:string,
 ): Promise<IResponse> => {
   try {
   
     // Validate required parameters
-    const validation = requestValidator.validateRequiredFields({ email, otp }, [
+    const validation = requestValidator.validateRequiredFields({ email, otp, bookingId }, [
       "email",
       "otp",
+      "bookingId"
     ]);
 
     if (!validation.success) {
@@ -24,10 +28,11 @@ export const emailVeification = async (
 
     const verify = await nodemailer.verifyEmail(otp, email);
     if (verify) {
+        const res = await bookkingRepository.startWork(bookingId)
       return {
         status: 200,
         success: true,
-        message: "Succesfully logged In",
+        message: res
       };
     }
     throw ErrorResponse.badRequest("Wrong OTP");

@@ -68,6 +68,24 @@ export class WorkerAdapter {
   }
 
 
+  // @desc  Checking the otp valid or not
+  //route     POST api/user/emailVerification
+  //@access   Public
+  async emailVerification(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.workerusecase.emailVerification(req.body);
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          // data: user.data,
+          message: user.message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
   // @desc    Logout user / clear cookie
   // @route   POST /api/user/logout
   // @access  Public

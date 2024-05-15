@@ -3,6 +3,7 @@ import { IBookingRepository } from "../../../usecaseLayer/interface/repository/I
 import BookingModel from "../model/bookingModel";
 import { bookService } from "./booking/bookService";
 import { commitWork } from "./booking/commitWork";
+import { startWork } from "./booking/startWork";
 
 
 
@@ -18,6 +19,11 @@ export class BookingRepository implements IBookingRepository {
   // commit work
 async commitWork(workerId: string, status: string, _id:string): Promise<string> {
    return commitWork(workerId, status, _id, this.bookingModel)
+}  
+
+  // start work
+async startWork(bookingId:string): Promise<string> {
+   return startWork(bookingId, this.bookingModel)
 }   
 
 }

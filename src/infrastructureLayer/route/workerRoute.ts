@@ -35,11 +35,19 @@ router.patch("/commitWork",AuthMiddleware.protectWorker,
   bookingAdapter.commitWork(req, res, next)
 );
 
+// ======== routes for start work and otp verificationn
+
 // for start work otp verification
 router.post(
   "/sendOtpToEmail",AuthMiddleware.protectWorker,
   (req: Request, res: Response, next: NextFunction) =>
     workerAdapter.sendOtpToEmail(req, res, next)
+);
+
+// route for verify email using otp
+router.post("/verifyEmail",AuthMiddleware.protectWorker, 
+(req: Request, res: Response, next: NextFunction) =>
+  workerAdapter.emailVerification(req, res, next)
 );
 
 // // Route for user logout

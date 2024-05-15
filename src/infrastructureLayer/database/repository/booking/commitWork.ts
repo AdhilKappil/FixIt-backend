@@ -7,10 +7,6 @@ export const commitWork = async (
   bookingModel: typeof BookingModel
 ): Promise<string> => {
   try {
-    console.log(_id);
-    console.log(workerId);
-    console.log(status);
-    
     const order = await bookingModel.findOne({_id})
     if(order){
         if(status === "cancelled"){

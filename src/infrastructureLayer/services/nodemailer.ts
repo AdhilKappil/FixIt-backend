@@ -117,7 +117,7 @@ class Nodemailer implements INodemailer {
         };
         
         await transporter.sendMail(mailOptions);
-        return "Hey please check your email";
+        return "An OTP has been sent to the client's email";
       } catch (error) {
         throw new Error(
           `Unable to send email verification email to ${email}: ${error}`
@@ -214,9 +214,9 @@ class Nodemailer implements INodemailer {
   //to verfiy the email to check if it is crct or not
   async verifyEmail(enteredOTP: string, email: string): Promise<boolean> {
     try {
-      const expectedOTP = this.otps.get(email);
+      const expectedOTP = this.startWorkOtp.get(email);
       if (expectedOTP === enteredOTP) {
-        this.otps.delete(email);
+        this.startWorkOtp.delete(email);
         return true;
       } else {
         return false;
