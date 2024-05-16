@@ -68,5 +68,23 @@ export class BookingAdapter {
   }
 
 
+   // @desc  Checking the otp valid or not
+  //route     POST api/user/generateBill
+  //@access   Public
+  async addPayment(req: Req, res: Res, next: Next) {
+    try {
+      const user = await this.bookingusecase.addPayment(req.body);
+      user &&
+        res.status(user.status).json({
+          success: user.success,
+          // data: user.data,
+          message: user.message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
 
 }

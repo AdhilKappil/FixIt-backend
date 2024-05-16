@@ -1,5 +1,6 @@
 import { IBookingRepository } from "../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
+import { addPayment } from "./booking/addPayment";
 import { bookService } from "./booking/bookService";
 import { commitWork } from "./booking/commitWork";
 import { getBokkings } from "./booking/getBookings";
@@ -100,6 +101,11 @@ export class BookingUseCase {
       _id
     );
   }
+
+    //to add payment
+    async addPayment({price, _id }: { price:number; _id:string}) {
+      return addPayment(this.requestValidator, this.bookingRepository, price, _id);
+    }
 
 
 }

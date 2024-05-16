@@ -105,4 +105,6 @@ export class WorkerUseCase {
     return emailVerification(this.requestValidator, this.nodemailer,this.bookingRepository,otp, email, bookingId);
   }
 
+
+
 }

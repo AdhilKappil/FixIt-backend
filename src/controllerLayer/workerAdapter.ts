@@ -86,6 +86,7 @@ export class WorkerAdapter {
   }
 
 
+
   // @desc    Logout user / clear cookie
   // @route   POST /api/user/logout
   // @access  Public

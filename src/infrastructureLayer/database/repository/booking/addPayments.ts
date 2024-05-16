@@ -1,15 +1,17 @@
 import BookingModel from "../../model/bookingModel";
 
-export const startWork = async (
-  bookingId: string,
+export const addPayment = async (
+  price:number,
+  _id:string,
   bookingModel: typeof BookingModel
 ): Promise<string> => {
   try {
-    const order = await bookingModel.findOne({_id:bookingId})
+    const order = await bookingModel.findOne({_id})
     if(order){
-          order.price = 1
+          order.price = price
+          order.status = "completed"
           await order.save()
-          return "Successfully Verified.Now you can start work"
+          return "Thank you for your service"
     }else{
         return "Something is went wrong"
     }

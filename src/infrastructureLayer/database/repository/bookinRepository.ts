@@ -1,6 +1,7 @@
 import { IBooking } from "../../../domainLayer/booking";
 import { IBookingRepository } from "../../../usecaseLayer/interface/repository/IbookingRepository";
 import BookingModel from "../model/bookingModel";
+import { addPayment } from "./booking/addPayments";
 import { bookService } from "./booking/bookService";
 import { commitWork } from "./booking/commitWork";
 import { startWork } from "./booking/startWork";
@@ -24,6 +25,11 @@ async commitWork(workerId: string, status: string, _id:string): Promise<string> 
   // start work
 async startWork(bookingId:string): Promise<string> {
    return startWork(bookingId, this.bookingModel)
+}   
+
+  // add payment
+async addPayment(price:number, _id:string): Promise<string> {
+   return addPayment(price,_id, this.bookingModel)
 }   
 
 }

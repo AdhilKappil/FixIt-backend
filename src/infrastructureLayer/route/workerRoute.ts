@@ -50,6 +50,12 @@ router.post("/verifyEmail",AuthMiddleware.protectWorker,
   workerAdapter.emailVerification(req, res, next)
 );
 
+// route for add add payment
+router.post("/generateBill",AuthMiddleware.protectWorker, 
+(req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.addPayment(req, res, next)
+);
+
 // // Route for user logout
 // router.post(
 //   "/logout",
