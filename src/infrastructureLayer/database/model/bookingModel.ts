@@ -8,6 +8,8 @@ const bookingSchema: Schema = new Schema<IBooking & Document>(
     workerId: { type: String, default:""},
     service: { type: String, required: true },
     serviceImg: { type: String, required: true },
+    firstHourCharge: { type: Number, required: true },
+    laterHourCharge: { type: Number, required: true },
     date: { type: String, required: true },
     startTime: { type: String, required: true},
     endTime: { type: String, required: true },

@@ -9,6 +9,8 @@ export const bookService = async (
   userId: string,
   service: string,
   serviceImg:string,
+  firstHourCharge : number,
+  laterHourCharge : number,
   description: string,
   date: string,
   startTime: string,
@@ -19,8 +21,8 @@ export const bookService = async (
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { userId,service,serviceImg, description,date,startTime,endTime,latitude,longitude },
-      [ "userId","service","serviceImg", "description", "date", "startTime", "endTime", "latitude", "longitude"]
+      { userId,service,serviceImg,firstHourCharge,laterHourCharge, description,date,startTime,endTime,latitude,longitude },
+      [ "userId","service","serviceImg","firstHourCharge","laterHourCharge", "description", "date", "startTime", "endTime", "latitude", "longitude"]
     );
 
     if (!validation.success) {
@@ -31,6 +33,8 @@ export const bookService = async (
         userId,
         service,
         serviceImg,
+        firstHourCharge,
+        laterHourCharge,
         description,
         date,
         startTime,

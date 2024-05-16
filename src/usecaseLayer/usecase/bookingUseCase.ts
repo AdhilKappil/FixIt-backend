@@ -21,6 +21,8 @@ export class BookingUseCase {
     userId,
     service,
     serviceImg,
+    firstHourCharge,
+    laterHourCharge,
     description,
     date,
     startTime,
@@ -31,6 +33,8 @@ export class BookingUseCase {
     userId: string;
     service: string;
     serviceImg:string;
+    firstHourCharge : number;
+    laterHourCharge : number;
     description: string;
     date: string;
     startTime: string;
@@ -44,6 +48,8 @@ export class BookingUseCase {
       userId,
       service,
       serviceImg,
+      firstHourCharge,
+      laterHourCharge,
       description,
       date,
       startTime,
