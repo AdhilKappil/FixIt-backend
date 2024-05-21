@@ -85,6 +85,61 @@ export class BookingAdapter {
     }
   }
 
+   // @desc    Pay for the service
+  // @route   POST /api/user/payment
+  // @access  Private
+  async payment(req: Req, res: Res, next: Next) {
+    try {
+        console.log('entered')
+        const payment = await this.bookingusecase.createPayment(req.body)
+        // console.log('the payment status in controller is :', payment)
+        res.status(payment.status).json({
+            data: payment.data,
+
+        })
+    } catch (err) {
+        // console.log('the payment controller error is ', error)
+        next(err)
+    }
+}
+
+
+  // @desc    Pay for the service
+  // @route   POST /api/user/webhook
+  // @access  Private
+async webhook(req: Req, res: Res, next: Next) {
+  try {
+      // Parse the incoming webhook event
+      const event = req.body;
+      console.log('Webhook entered in adapter');
+      console.log('kwsdjfhlksjhdflkjsdf',event);
+      // Check the type of event
+      switch (event.type) {
+       
+        
+          case 'checkout.session.completed':
+            console.log("in switch case");
+            
+              // Handle charge succeeded event
+              const session = event.data.object;
+              const metadata = session.metadata;
+              const bookingId = metadata.bookingId;
+              // console.log('the session is :', session)
+              const transactionId = event.data.object.payment_intent;
+              // console.log('The transaction id is :', transactionId);
+              await this.bookingusecase.paymentConfirmation({ transactionId, bookingId })
+              break;
+          default:
+              console.log(`Unhandled event type: ${event.type}`);
+      }
+     
+      // Respond with a success message
+      res.status(200).json({ received: true });
+  } catch (error) {
+      next(error);
+  }
+}
+
 
 
 }

@@ -4,6 +4,7 @@ import BookingModel from "../model/bookingModel";
 import { addPayment } from "./booking/addPayments";
 import { bookService } from "./booking/bookService";
 import { commitWork } from "./booking/commitWork";
+import { payment } from "./booking/payment";
 import { startWork } from "./booking/startWork";
 
 
@@ -31,5 +32,10 @@ async startWork(bookingId:string): Promise<string> {
 async addPayment(price:number, _id:string): Promise<string> {
    return addPayment(price,_id, this.bookingModel)
 }   
+
+  // add payment
+  async payment(  transactionId:string, bookingId:string): Promise<string> {
+    return payment(transactionId,bookingId, this.bookingModel)
+ } 
 
 }
