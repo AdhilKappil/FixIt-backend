@@ -18,6 +18,7 @@ export const paymentConfirmation = async(
         const workerAmount = amount - adminProfit
         await workerRepository.amountToWallet(workerId,workerAmount)
         await adminRepository.amountToWallet(adminProfit)
+        
     }catch(err){
         console.log(err)
 

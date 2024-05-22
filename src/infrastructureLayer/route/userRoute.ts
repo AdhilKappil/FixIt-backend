@@ -93,7 +93,6 @@ router.post('/payment',(req:Request,res:Response,next:NextFunction)=>{
   bookingAdapter.payment(req,res,next)
 })
 
-
 router.post('/webhook',(req:Request,res:Response,next:NextFunction)=>{
    bookingAdapter.webhook(req,res,next)
 })

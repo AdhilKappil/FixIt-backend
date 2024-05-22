@@ -22,9 +22,9 @@ router.post(
 );
 
 // For get bookings
-router.get("/getWorker",AuthMiddleware.protectWorker,
+router.get("/getWorker",
  (req: Request, res: Response, next: NextFunction) =>
-  bookingAdapter.getBookings(req, res, next)
+  workerAdapter.getWorker(req, res, next)
 );
 
 // ============== Work related routes =============== //

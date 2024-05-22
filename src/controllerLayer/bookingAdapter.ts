@@ -111,8 +111,6 @@ async webhook(req: Req, res: Res, next: Next) {
   try {
       // Parse the incoming webhook event
       const event = req.body;
-      console.log('Webhook entered in adapter');
-      console.log('kwsdjfhlksjhdflkjsdf',event);
       // Check the type of event
       switch (event.type) {
           case 'checkout.session.completed':

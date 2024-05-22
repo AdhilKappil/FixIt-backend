@@ -55,10 +55,12 @@ export class WorkerAdapter {
   //@access   Public
   async getWorker(req: Req, res: Res, next: Next) {
     try {
-      const worker = await this.workerusecase.sendOtpToEmail(req.body);
+      const email = req.query.email as string
+      const worker = await this.workerusecase.getWorker(email);
       res.status(worker.status).json({
         success: worker.success,
         message: worker.message,
+        worker:worker.data
       });
     } catch (err) {
       next(err);
