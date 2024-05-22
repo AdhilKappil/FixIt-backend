@@ -6,14 +6,12 @@ import { IResponse } from "../../interface/services/Iresponse";
 export const createPayment = async(
     stripe:IStripe,
     amount:number,
-    bookingId:string
+    bookingId:string,
+    workerId:string
 ):Promise<IResponse>=>{
-
     try{
-            const res = await stripe.createPaymentIntent(amount,bookingId)
-            
+            const res = await stripe.createPaymentIntent(amount,bookingId,workerId)
             if(res){
-                
                 return {
                     status: 200,
                     success: true,

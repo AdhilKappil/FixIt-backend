@@ -4,18 +4,16 @@ const stripe = new Stripe('sk_test_51PIUXXSCq8UdAofezmDXxgO9QstvC55MJp2skB0Uqy0L
 });
 import IStripe from "../../usecaseLayer/interface/services/IStripe";
 import { IResponse} from "../../usecaseLayer/interface/services/Iresponse";
+import { Req } from "../types/expressTypes";
 
 
 class StripeService implements IStripe {
 
     async  createPaymentIntent(
       amount:number,
-      bookingId:string
-
+      bookingId:string,
+      workerId:string
     ):Promise<IResponse> {
-      console.log(amount)
-      console.log(bookingId)
-
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
@@ -31,17 +29,14 @@ class StripeService implements IStripe {
           },
         ],
         mode: 'payment',
-        success_url: 'http://localhost:9000/profile',
-        cancel_url: 'http://localhost:9000/',
-        metadata: {
-          name:"adhil ali",  
-          bookingId: bookingId,
-          amount:amount
+        success_url: 'http://localhost:9000/profile/myBookings',
+        cancel_url: 'http://localhost:9000/profile/myBookings',
+        metadata: { 
+          bookingId,
+          amount,
+          workerId
         },
       });
-
-      console.log(session)
-      console.log('the stripe session id is :',session.id)
         return {
           success:true,
           status:200,
@@ -49,9 +44,7 @@ class StripeService implements IStripe {
         }
   }
 
-  async paymentSuccess(req:any){
-
-    // console.log('payment success request is :',req)
+  async paymentSuccess(req:Req){
     const payload = req.body;     
     const payloadString = JSON.stringify(payload, null, 2);
     const signature = req.headers["stripe-signature"];

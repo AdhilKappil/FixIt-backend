@@ -26,7 +26,7 @@ export class WorkerAdapter {
     }
   }
 
-   // @desc  Register new user
+  // @desc  Register new user
   //route     POST api/user/login
   //@access   Public
   async loginWorker(req: Req, res: Res, next: Next) {
@@ -42,6 +42,22 @@ export class WorkerAdapter {
       res.status(worker.status).json({
         success: worker.success,
         data: worker.data,
+        message: worker.message,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+   // @desc  Get worker
+  //route     POST api/worker/getWorker
+  //@access   Public
+  async getWorker(req: Req, res: Res, next: Next) {
+    try {
+      const worker = await this.workerusecase.sendOtpToEmail(req.body);
+      res.status(worker.status).json({
+        success: worker.success,
         message: worker.message,
       });
     } catch (err) {

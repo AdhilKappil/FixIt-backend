@@ -3,6 +3,7 @@ import { IWorkerRepository } from "../../../usecaseLayer/interface/repository/Iw
 import { RequesEmailData } from "../../../usecaseLayer/interface/services/Iresponse";
 import WorkerModel from "../model/workerModel";
 import { acceptOrRejectRequest } from "./worker/acceptRequest";
+import { amountToWallet } from "./worker/amountToWallet";
 import { blockWorker } from "./worker/blockWorker";
 import { createWorker } from "./worker/createWorker";
 import { findWorker } from "./worker/findWorker";
@@ -30,6 +31,11 @@ export class WorkerRepository implements IWorkerRepository {
     // admin can block worker
     async blockWorker(_id: string): Promise<string | null> {
       return blockWorker(_id,this.workerModel)
+    }
+
+    // for add work amount to wallet
+    async amountToWallet(workerId: string, workerAmount:number): Promise<string | null> {
+      return amountToWallet(workerId,workerAmount,this.workerModel)
     }
 
 }

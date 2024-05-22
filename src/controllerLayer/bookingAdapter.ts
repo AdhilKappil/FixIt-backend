@@ -115,19 +115,17 @@ async webhook(req: Req, res: Res, next: Next) {
       console.log('kwsdjfhlksjhdflkjsdf',event);
       // Check the type of event
       switch (event.type) {
-       
-        
           case 'checkout.session.completed':
-            console.log("in switch case");
-            
               // Handle charge succeeded event
               const session = event.data.object;
               const metadata = session.metadata;
               const bookingId = metadata.bookingId;
+              const workerId = metadata.workerId;
+              const amount = metadata.amount
               // console.log('the session is :', session)
               const transactionId = event.data.object.payment_intent;
               // console.log('The transaction id is :', transactionId);
-              await this.bookingusecase.paymentConfirmation({ transactionId, bookingId })
+              await this.bookingusecase.paymentConfirmation({ transactionId, bookingId ,workerId,amount})
               break;
           default:
               console.log(`Unhandled event type: ${event.type}`);
