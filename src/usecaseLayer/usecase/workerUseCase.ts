@@ -7,6 +7,7 @@ import Ijwt from "../interface/services/Ijwt";
 import INodemailer from "../interface/services/Inodemailer";
 import { createWorker } from "./worker/createWorker";
 import { emailVerification } from "./worker/emailVerification";
+import { getWorker } from "./worker/getWorker";
 import { loginWorker } from "./worker/loginWorker";
 import { sendOtpToEmail } from "./worker/sendOtpToEmail";
 
@@ -98,6 +99,11 @@ export class WorkerUseCase {
   //to send OTP to verify the user's detail
   async sendOtpToEmail({ email, name }: { email: string; name: string }) {
     return sendOtpToEmail(this.requestValidator,this.userRepository, this.nodemailer, email, name);
+  }
+
+  //to send OTP to verify the user's detail
+  async getWorker(email:string) {
+    return getWorker(email,this.workerRepository);
   }
 
    //to check if the user entered OTP is correct or not

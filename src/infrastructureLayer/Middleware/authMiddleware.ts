@@ -101,8 +101,8 @@ class AuthMiddleware {
           console.log('before next');
           next();
         } else {
-          console.error('Admin not found');
-          res.status(404).send('Admin not found');
+          console.error('Worker not found');
+          res.status(404).send('Worker not found');
         }
       } catch (error) {
         console.error(error);

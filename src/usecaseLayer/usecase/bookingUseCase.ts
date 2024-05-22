@@ -1,20 +1,33 @@
+import { IAdminRepository } from "../interface/repository/IadminRepository";
 import { IBookingRepository } from "../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../interface/repository/IvalidareRepository";
+import { IWorkerRepository } from "../interface/repository/IworekerRepository";
+import IStripe from "../interface/services/IStripe";
 import { addPayment } from "./booking/addPayment";
 import { bookService } from "./booking/bookService";
 import { commitWork } from "./booking/commitWork";
+import { createPayment } from "./booking/createPayment";
 import { getBokkings } from "./booking/getBookings";
+import { paymentConfirmation } from "./booking/paymentConfirmation";
 
 export class BookingUseCase {
   private readonly bookingRepository: IBookingRepository;
+  private readonly workerRepository: IWorkerRepository;
+  private readonly adminRepository: IAdminRepository;
   private readonly requestValidator: IRequestValidator;
-
+  private readonly stripe : IStripe
   constructor(
     bookingRepository: IBookingRepository,
-    requestValidator: IRequestValidator
+    workerRepository: IWorkerRepository,
+    adminRepository: IAdminRepository,
+    requestValidator: IRequestValidator,
+    stripe: IStripe
   ) {
     this.bookingRepository = bookingRepository;
+    this.workerRepository = workerRepository;
+    this.adminRepository = adminRepository;
     this.requestValidator = requestValidator;
+    this.stripe = stripe
   }
 
   //to book service
@@ -106,6 +119,18 @@ export class BookingUseCase {
     async addPayment({price, _id }: { price:number; _id:string}) {
       return addPayment(this.requestValidator, this.bookingRepository, price, _id);
     }
+
+// adding price and details to webhook
+    async createPayment({amount,bookingId,workerId}:{ amount:number,bookingId:string,workerId:string}){
+      return createPayment(this.stripe,amount,bookingId,workerId)
+  }
+
+  // after payment confirmation logic
+  async paymentConfirmation({transactionId,bookingId,workerId,amount}:
+    {transactionId:string,bookingId:string,workerId:string,amount:number}){
+      return paymentConfirmation(this.bookingRepository,this.workerRepository,this.adminRepository
+        ,transactionId,bookingId,workerId,amount)
+  }
 
 
 }

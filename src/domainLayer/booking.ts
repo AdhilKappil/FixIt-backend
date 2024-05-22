@@ -13,6 +13,7 @@ export interface IBooking {
     status?: string;
     price?:number;
     payment?:boolean;
+    paymentId?:string;
     latitude:number;
     longitude:number;
   }

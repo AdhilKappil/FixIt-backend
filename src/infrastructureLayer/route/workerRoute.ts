@@ -21,6 +21,12 @@ router.post(
     workerAdapter.loginWorker(req, res, next)
 );
 
+// For get bookings
+router.get("/getWorker",
+ (req: Request, res: Response, next: NextFunction) =>
+  workerAdapter.getWorker(req, res, next)
+);
+
 // ============== Work related routes =============== //
 
 // For get bookings

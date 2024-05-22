@@ -17,6 +17,7 @@ const bookingSchema: Schema = new Schema<IBooking & Document>(
     status: { type: String, default: "pending" },
     price: { type: Number, default:0 },
     payment:{type:Boolean, default: false},
+    paymentId:{type:String, default: ""},
     latitude: {type:Number, required: true},
     longitude: {type:Number, required: true}
 },    

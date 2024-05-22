@@ -88,49 +88,15 @@ router.patch("/cancelBooking",AuthMiddleware.protectUser,
 
 
 // ======== strip integration =============
-// const stripe = require('stripe')('sk_test_...');
 
-// // This is your Stripe CLI webhook secret for testing your endpoint locally.
-// let endpointSecret:string ;
-  
-// // endpointSecret = "whsec_ddc36f00110d9789bb7719fa5be16a2d6e13285facca913b211ac489aa65e1c8";
+router.post('/payment',(req:Request,res:Response,next:NextFunction)=>{
+  bookingAdapter.payment(req,res,next)
+})
 
+router.post('/webhook',(req:Request,res:Response,next:NextFunction)=>{
+   bookingAdapter.webhook(req,res,next)
+})
 
-// router.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
-//   const sig = req.headers['stripe-signature'];
-
-//   let data ;
-//   let eventType;
-
-//   if(endpointSecret){
-
-//     let event;
-  
-//     try {
-//       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-//       console.log("webhook verified");
-      
-//     } catch (err:any) {
-//       console.log(`Webhook Error: ${err.message}`);
-      
-//       res.status(400).send(`Webhook Error: ${err.message}`);
-//       return;
-//     }
-//     data = event.data.object
-//     eventType = event.type
-//   }else{
-//     data = req.body.object;
-//     eventType = req.body.type
-//   }
-
-//   // handle the event 
-//   if(eventType === "checkout.session.completed"){
-
-//   }
-
-
-//   res.send().end();
-// });
 
 
 
