@@ -4,8 +4,8 @@ import { IBooking } from "../../../domainLayer/booking";
 
 const bookingSchema: Schema = new Schema<IBooking & Document>(
 {  
-    userId: { type: String, required: true },
-    workerId: { type: String, default:""},
+  userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  workerId: { type: Schema.Types.ObjectId, ref: "Worker", default: null },
     service: { type: String, required: true },
     serviceImg: { type: String, required: true },
     firstHourCharge: { type: Number, required: true },

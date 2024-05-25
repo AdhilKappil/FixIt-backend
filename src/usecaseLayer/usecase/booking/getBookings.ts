@@ -1,10 +1,11 @@
-import BookingModel from "../../../infrastructureLayer/database/model/bookingModel";
 import ErrorResponse from "../../handler/errorResponse";
+import { IBookingRepository } from "../../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
 import { BookingResponse } from "../../interface/services/Iresponse";
 
 export const getBokkings = async (
   requestValidator: IRequestValidator,
+  bokkingRepository: IBookingRepository,
   userId: string,
   status: string,
   workerId : string,
@@ -21,42 +22,8 @@ export const getBokkings = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
     
-
-    if(workerId){   
-      const booking = await BookingModel.find({workerId,status})
-      return {
-          status: 200,
-          success: true,
-          data: booking
-        };
-    }
-
-    if(service){
-      const booking = await BookingModel.find({service,status})
-      return {
-          status: 200,
-          success: true,
-          data: booking
-        };
-    }
-
-    if(status === "all"){
-      const booking = await BookingModel.find({ userId, status: { $ne: "cancelled" } });
-      return {
-          status: 200,
-          success: true,
-          data: booking
-      };
-      
-    }else{
-        const booking = await BookingModel.find({userId, status})
-        
-        return {
-            status: 200,
-            success: true,
-            data: booking
-          };
-    }
+  const booking = await bokkingRepository.getBookings(userId,status,workerId,service)
+  return booking
     
   } catch (err) {
     throw err;

@@ -19,6 +19,7 @@ export class BookingAdapter {
       res.status(newOrder.status).json({
         success: newOrder.success,
         message: newOrder.message,
+        data:newOrder.data
       });
     } catch (err) {
       next(err);

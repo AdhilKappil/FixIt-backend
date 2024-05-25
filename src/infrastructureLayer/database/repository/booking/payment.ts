@@ -6,12 +6,7 @@ export const payment = async (
   bookingModel: typeof BookingModel
 ): Promise<string> => {
   try {
-    console.log("in payment respository");
-    console.log("transaction Id",transactionId);
-    console.log("booking id ",bookingId);
-    
-    
-    
+        
     const order = await bookingModel.findOne({_id:bookingId})
     if(order){
           order.payment = true

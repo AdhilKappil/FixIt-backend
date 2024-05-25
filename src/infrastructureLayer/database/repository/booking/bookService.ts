@@ -6,11 +6,11 @@ import BookingModel from "../../model/bookingModel";
 export const bookService = async (
   newOrder: IBooking,
   bookingModel: typeof BookingModel
-): Promise<string> => {
+): Promise<IBooking> => {
   try {
     const user = await bookingModel.create(newOrder);
     await user.save();
-    return "Please wait patiently for confirmation from the worker. Thank you for choosing our service!";
+    return user;
   } catch (error) {
     throw error;
   }

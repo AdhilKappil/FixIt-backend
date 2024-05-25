@@ -1,7 +1,7 @@
 import ErrorResponse from "../../handler/errorResponse";
 import { IBookingRepository } from "../../interface/repository/IbookingRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
-import { IResponse } from "../../interface/services/Iresponse";
+import { BookingResponse } from "../../interface/services/Iresponse";
 
 export const bookService = async (
   requestValidator: IRequestValidator,
@@ -17,7 +17,7 @@ export const bookService = async (
   endTime: string,
   latitude:number,
   longitude:number,
-): Promise<IResponse> => {
+): Promise<BookingResponse> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
@@ -48,7 +48,8 @@ export const bookService = async (
       return {
         status: 200,
         success: true,
-        message: createBooking
+        message: "Please wait patiently for confirmation from the worker. Thank you for choosing our service!",
+        data:createBooking
       };
     
    

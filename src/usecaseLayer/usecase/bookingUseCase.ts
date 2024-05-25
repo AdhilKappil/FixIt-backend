@@ -88,6 +88,7 @@ export class BookingUseCase {
   }) {
     return getBokkings(
       this.requestValidator,
+      this.bookingRepository,
       userId,
       status,
       workerId,
