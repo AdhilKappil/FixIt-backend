@@ -13,6 +13,8 @@ export const getBokkings = async (
 
     if(workerId){   
       const booking = await bookingModel.find({workerId,status})
+      .populate('userId', 'name')
+      .exec();
       return {
           status: 200,
           success: true,
@@ -31,6 +33,10 @@ export const getBokkings = async (
 
     if(!workerId && !userId && !service){
       const booking = await bookingModel.find({payment:true})
+      .populate('workerId', 'name')
+      .populate('userId', 'name')
+      .exec();
+      
       return {
           status: 200,
           success: true,
@@ -48,7 +54,6 @@ export const getBokkings = async (
       
     }else{
         const booking = await bookingModel.find({userId, status})
-        
         return {
             status: 200,
             success: true,

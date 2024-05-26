@@ -60,8 +60,7 @@ export class AdminUseCase {
 
   // user get all user data
   async findAllUser() {
-    return getUsers(
-    );
+    return getUsers(this.userRepository);
   }
 
   // block or unblock user

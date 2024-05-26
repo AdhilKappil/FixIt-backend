@@ -7,6 +7,7 @@ import { blockUser } from "./user/blockUser";
 import { createUser } from "./user/createUser";
 import { findUser } from "./user/findUser";
 import { forgotPassword } from "./user/forgotPassword";
+import { getUser } from "./user/getUser";
 import { updateProfile } from "./user/updateProfile";
 
 
@@ -44,5 +45,11 @@ export class UserRepository implements IUserRepository {
   async forgotPassword(newPassword: IforgotPassword): Promise<IUser> {
     return forgotPassword(newPassword, this.usersModel);
   }
+
+  // Create new user
+  async getUser(): Promise<IUser[] | never> {
+    return getUser(this.usersModel)
+  }
+
 
 }
