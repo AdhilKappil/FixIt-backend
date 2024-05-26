@@ -8,4 +8,6 @@ export interface IWorkerRepository {
   acceptOrRejectRequest(id: string, status:string): Promise<RequesEmailData>;
   blockWorker(_id: string): Promise<string | null>;
   amountToWallet(workerId: string,workerAmount:number): Promise<string | null>;
+  getWorkers(): Promise<IWorker[]>;
+
 }

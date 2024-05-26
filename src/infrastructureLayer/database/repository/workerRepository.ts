@@ -7,6 +7,7 @@ import { amountToWallet } from "./worker/amountToWallet";
 import { blockWorker } from "./worker/blockWorker";
 import { createWorker } from "./worker/createWorker";
 import { findWorker } from "./worker/findWorker";
+import { getWorkers } from "./worker/getWorkers";
 
 
 // This class for exporting all the single DB operations togethor 
@@ -16,6 +17,11 @@ export class WorkerRepository implements IWorkerRepository {
   // Create new user
   async createWorker(newWorker: IWorker): Promise<string> {
     return createWorker(newWorker, this.workerModel);
+  }
+
+   // get all workers
+   async getWorkers(): Promise<IWorker[] | never> {
+    return getWorkers(this.workerModel)
   }
 
   // Check if a worker exists using email

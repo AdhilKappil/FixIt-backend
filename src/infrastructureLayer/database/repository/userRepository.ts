@@ -46,7 +46,7 @@ export class UserRepository implements IUserRepository {
     return forgotPassword(newPassword, this.usersModel);
   }
 
-  // Create new user
+  // get all user
   async getUser(): Promise<IUser[] | never> {
     return getUser(this.usersModel)
   }

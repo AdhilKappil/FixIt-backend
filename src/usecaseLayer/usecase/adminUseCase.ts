@@ -73,8 +73,7 @@ export class AdminUseCase {
 
    // user get all user data
    async findAllRequests() {
-    return getJoinRequests(
-    );
+    return getJoinRequests(this.workerRepository);
   }
 
   // worker request accept or reject

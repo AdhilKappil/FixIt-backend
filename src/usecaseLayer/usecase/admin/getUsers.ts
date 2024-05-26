@@ -1,4 +1,3 @@
-import UserModel from "../../../infrastructureLayer/database/model/userModel";
 import { IUserRepository } from "../../interface/repository/IuserRepository";
 import { IUserResponse } from "../../interface/services/Iresponse";
 

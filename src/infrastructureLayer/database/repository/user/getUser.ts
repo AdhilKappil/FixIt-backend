@@ -9,7 +9,7 @@ export const getUser = async(
         if (users) {
           return users
         }
-        throw new Error("Internal Server Error") 
+        throw new Error("No users") 
     } catch (error) {
         throw error;
     }
