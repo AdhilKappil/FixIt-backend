@@ -26,7 +26,7 @@ export const emailVerification = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-    const verify = await nodemailer.verifyEmail(otp, email);
+    const verify = await nodemailer.verifyEmailToStartWork(otp, email);
     if (verify) {
         const res = await bookkingRepository.startWork(bookingId)
       return {

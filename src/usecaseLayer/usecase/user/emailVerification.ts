@@ -22,6 +22,8 @@ export const emailVeification = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
+    console.log(otp,"otp in");
+    
     const verify = await nodemailer.verifyEmail(otp, email);
     if (verify) {
       return {

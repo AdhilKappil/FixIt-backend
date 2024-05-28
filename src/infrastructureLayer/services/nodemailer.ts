@@ -211,8 +211,8 @@ class Nodemailer implements INodemailer {
     }
   }
 
-  //to verfiy the email to check if it is crct or not
-  async verifyEmail(enteredOTP: string, email: string): Promise<boolean> {
+  //to verfiy the email to check if it is crct or not to start the work
+  async verifyEmailToStartWork(enteredOTP: string, email: string): Promise<boolean> {
     try {
       const expectedOTP = this.startWorkOtp.get(email);
       if (expectedOTP === enteredOTP) {
@@ -225,6 +225,25 @@ class Nodemailer implements INodemailer {
       throw new Error("Wrong otp");
     }
   }
+
+   //to verfiy the email to check if it is crct or not
+   async verifyEmail(enteredOTP: string, email: string): Promise<boolean> {
+    try {
+      const expectedOTP = this.otps.get(email);
+      
+      if (expectedOTP === enteredOTP) {
+        this.startWorkOtp.delete(email);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      throw new Error("Wrong otp");
+    }
+  }
+
 }
+
+
 
 export default Nodemailer;
