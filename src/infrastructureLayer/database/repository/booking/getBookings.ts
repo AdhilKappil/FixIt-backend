@@ -32,6 +32,14 @@ export const getBokkings = async (
     }
 
     if(!workerId && !userId && !service){
+      if(status === "all"){
+        const booking = await bookingModel.find({status: { $ne: "cancelled" } });
+        return {
+            status: 200,
+            success: true,
+            data: booking
+          };
+      }
       const booking = await bookingModel.find({payment:true})
       .populate('workerId', 'name')
       .populate('userId', 'name')

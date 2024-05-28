@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { adminAdapter } from "./injections/adminInjection";
 import { serviceAdapter } from "./injections/serviceInjection";
 import AuthMiddleware from "../Middleware/authMiddleware";
+import { bookingAdapter } from "./injections/bookingInjection";
 
 const router = express.Router();
 
@@ -75,5 +76,13 @@ router.patch(
   (req: Request, res: Response, next: NextFunction) =>
     adminAdapter.block_unBlockWorker(req, res, next)
 );
+
+
+// For get bookings
+router.get("/getBookings",AuthMiddleware.protectAdmin,
+ (req: Request, res: Response, next: NextFunction) =>
+  bookingAdapter.getBookings(req, res, next)
+);
+
 
 export default router;

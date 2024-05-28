@@ -1,11 +1,13 @@
-import Stripe from "stripe";
-const stripe = new Stripe('sk_test_51PIUXXSCq8UdAofezmDXxgO9QstvC55MJp2skB0Uqy0LIsnPjwnR4SR2FuATUflntTeyrkv2i6BMgCVEN1m8Cqmp00Wk0ZJPqd',{
-    apiVersion: "2024-04-10"
-});
 import IStripe from "../../usecaseLayer/interface/services/IStripe";
 import { IResponse} from "../../usecaseLayer/interface/services/Iresponse";
 import { Req } from "../types/expressTypes";
 
+import dotenv from "dotenv";
+import Stripe from "stripe";
+dotenv.config();
+const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY as string,{
+    apiVersion: "2024-04-10"
+});
 
 class StripeService implements IStripe {
 
@@ -14,6 +16,8 @@ class StripeService implements IStripe {
       bookingId:string,
       workerId:string
     ):Promise<IResponse> {
+      console.log("here");
+      
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
