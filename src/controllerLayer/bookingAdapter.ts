@@ -94,12 +94,10 @@ export class BookingAdapter {
     try {
       console.log("entered");
       const payment = await this.bookingusecase.createPayment(req.body);
-      // console.log('the payment status in controller is :', payment)
       res.status(payment.status).json({
         data: payment.data,
       });
     } catch (err) {
-      // console.log('the payment controller error is ', error)
       next(err);
     }
   }

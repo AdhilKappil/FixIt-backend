@@ -5,7 +5,7 @@ export class ServiceAdapter {
   private readonly serviceusecase: ServiceUseCase;
 
   constructor(serviceusecase: ServiceUseCase) {
-    this.serviceusecase = serviceusecase; // using dependency injection to call the adminusecase
+    this.serviceusecase = serviceusecase; 
   }
 
   // @desc    Create Service the user

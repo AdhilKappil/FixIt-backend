@@ -116,11 +116,10 @@ export class AdminAdapter {
     }
   }
 
-
   // @desc    Logout worker / clear cookie
   // @route   POST /api/worker/logout
   // @access  Public
-  async logoutAdmin(req: Req, res: Res, next:Next) {
+  async logoutAdmin(req: Req, res: Res, next: Next) {
     try {
       res.cookie("adminjwt", "", {
         httpOnly: true,
@@ -128,8 +127,7 @@ export class AdminAdapter {
       });
       res.status(200).json({ message: "Logged out successfully" });
     } catch (err) {
-      next(err)
+      next(err);
     }
   }
-
 }
