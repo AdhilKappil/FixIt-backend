@@ -65,23 +65,5 @@ export class ChatUseCase {
   }
 
 
-  // //to create service
-  // async getConversation({
-  //   senderId,
-  //   receiverId
-  // }: {
-  //   senderId : string,
-  //   receiverId: string
-  // }) {
-  //   return getConversation(
-  //     this.requestValidator,
-  //     this.chatRepository,
-  //     senderId,
-  //     receiverId
-  //   );
-  // }
-
-
-
 
 }

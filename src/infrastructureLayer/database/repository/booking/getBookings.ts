@@ -12,7 +12,7 @@ export const getBokkings = async (
   try {
 
     if(workerId){   
-      const booking = await bookingModel.find({workerId,status})
+      const booking = await bookingModel.find({workerId,status}).sort({date:1})
       .populate('userId', 'name')
       .exec();
       return {
@@ -23,7 +23,7 @@ export const getBokkings = async (
     }
 
     if(service){
-      const booking = await bookingModel.find({service,status})
+      const booking = await bookingModel.find({service,status}).sort({createdAt:1})
       return {
           status: 200,
           success: true,
@@ -40,7 +40,7 @@ export const getBokkings = async (
             data: booking
           };
       }
-      const booking = await bookingModel.find({payment:true})
+      const booking = await bookingModel.find({payment:true}).sort({updatedAt:-1})
       .populate('workerId', 'name')
       .populate('userId', 'name')
       .exec();
@@ -53,7 +53,7 @@ export const getBokkings = async (
     }
 
     if(status === "all"){
-      const booking = await bookingModel.find({ userId, status: { $ne: "cancelled" } });
+      const booking = await bookingModel.find({ userId, status: { $ne: "cancelled" } }).sort({updatedAt:-1});
       return {
           status: 200,
           success: true,
@@ -61,7 +61,7 @@ export const getBokkings = async (
       };
       
     }else{
-        const booking = await bookingModel.find({userId, status})
+        const booking = await bookingModel.find({userId, status}).sort({updatedAt:-1})
         return {
             status: 200,
             success: true,

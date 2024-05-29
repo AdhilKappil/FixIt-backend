@@ -54,7 +54,7 @@ export class ServiceUseCase {
     firstHourCharge,
     laterHourCharge,
     description,
-    // service_img,
+
   }: {
     _id : string
     serviceName: string;
@@ -62,7 +62,7 @@ export class ServiceUseCase {
     firstHourCharge:number;
     laterHourCharge:number;
     description: string;
-    // service_img: string;
+
   }) {
     return editService(
       this.requestValidator,
@@ -73,7 +73,6 @@ export class ServiceUseCase {
       firstHourCharge,
       laterHourCharge,
       isBlocked,
-      // service_img
     );
   }
 

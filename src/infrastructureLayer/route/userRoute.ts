@@ -26,15 +26,19 @@ router.post("/logout", (req: Request, res: Response, next: NextFunction) =>
 );
 
 // Route for add profile
-router.patch("/addProfile",AuthMiddleware.protectUser,
- (req: Request, res: Response, next: NextFunction) =>
-  userAdapter.addProfile(req, res, next)
+router.patch(
+  "/addProfile",
+  AuthMiddleware.protectUser,
+  (req: Request, res: Response, next: NextFunction) =>
+    userAdapter.addProfile(req, res, next)
 );
 
 // Route for update user data
-router.patch("/updateProfile",AuthMiddleware.protectUser,
- (req: Request, res: Response, next: NextFunction) =>
-  userAdapter.updateProfile(req, res, next)
+router.patch(
+  "/updateProfile",
+  AuthMiddleware.protectUser,
+  (req: Request, res: Response, next: NextFunction) =>
+    userAdapter.updateProfile(req, res, next)
 );
 
 //routes for forgot password otp verification
@@ -58,46 +62,45 @@ router.post("/sendEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.sendEmail(req, res, next)
 );
 
-// route for verify email 
+// route for verify email
 router.post("/verifyEmail", (req: Request, res: Response, next: NextFunction) =>
   userAdapter.emailVerification(req, res, next)
 );
 
-
 // ======= Service booking related routes =========== //
 
 // For book service
-router.post("/bookService",AuthMiddleware.protectUser,
- (req: Request, res: Response, next: NextFunction) =>
-  bookingAdapter.bookService(req, res, next)
+router.post(
+  "/bookService",
+  AuthMiddleware.protectUser,
+  (req: Request, res: Response, next: NextFunction) =>
+    bookingAdapter.bookService(req, res, next)
 );
 
 // For get bookings
-router.get("/getBookings",AuthMiddleware.protectUser,
- (req: Request, res: Response, next: NextFunction) =>
-  bookingAdapter.getBookings(req, res, next)
+router.get(
+  "/getBookings",
+  AuthMiddleware.protectUser,
+  (req: Request, res: Response, next: NextFunction) =>
+    bookingAdapter.getBookings(req, res, next)
 );
 
 // For commit work
-router.patch("/cancelBooking",AuthMiddleware.protectUser,
- (req: Request, res: Response, next: NextFunction) =>
-  bookingAdapter.commitWork(req, res, next)
+router.patch(
+  "/cancelBooking",
+  AuthMiddleware.protectUser,
+  (req: Request, res: Response, next: NextFunction) =>
+    bookingAdapter.commitWork(req, res, next)
 );
-
-
-
 
 // ======== strip integration =============
 
-router.post('/payment',(req:Request,res:Response,next:NextFunction)=>{
-  bookingAdapter.payment(req,res,next)
-})
+router.post("/payment", (req: Request, res: Response, next: NextFunction) => {
+  bookingAdapter.payment(req, res, next);
+});
 
-router.post('/webhook',(req:Request,res:Response,next:NextFunction)=>{
-   bookingAdapter.webhook(req,res,next)
-})
-
-
-
+router.post("/webhook", (req: Request, res: Response, next: NextFunction) => {
+  bookingAdapter.webhook(req, res, next);
+});
 
 export default router;

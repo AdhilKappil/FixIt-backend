@@ -77,19 +77,17 @@ router.patch(
     adminAdapter.block_unBlockWorker(req, res, next)
 );
 
-
 // For get bookings
-router.get("/getBookings",AuthMiddleware.protectAdmin,
- (req: Request, res: Response, next: NextFunction) =>
-  bookingAdapter.getBookings(req, res, next)
+router.get(
+  "/getBookings",
+  AuthMiddleware.protectAdmin,
+  (req: Request, res: Response, next: NextFunction) =>
+    bookingAdapter.getBookings(req, res, next)
 );
 
 // Route for user logout
-router.post(
-  "/logout",
-  (req: Request, res: Response, next: NextFunction) =>
-    adminAdapter.logoutAdmin(req, res, next)
+router.post("/logout", (req: Request, res: Response, next: NextFunction) =>
+  adminAdapter.logoutAdmin(req, res, next)
 );
-
 
 export default router;

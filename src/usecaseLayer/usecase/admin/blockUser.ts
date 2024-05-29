@@ -20,7 +20,7 @@ export const blockUnblockUser = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-      const block = await userRepository.blockUser(_id);
+       await userRepository.blockUser(_id);
       return {
         status: 200,
         success: true,

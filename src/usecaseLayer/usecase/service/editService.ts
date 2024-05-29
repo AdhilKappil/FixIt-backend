@@ -34,8 +34,6 @@ export const editService = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-    // const service = await serviceRepository.findService(serviceName); // checking if the service exist or not
-    // if (!service) {
       const updateService = {
         serviceName,
         description,
@@ -43,12 +41,9 @@ export const editService = async (
         laterHourCharge,
         isBlocked,
         _id
-        // service_img,
       };
       const createnewService = await serviceRepository.editService(updateService);
       return createnewService
-    // }
-    // throw ErrorResponse.badRequest("Service already exist");
   } catch (err) {
     throw err;
   }
