@@ -230,7 +230,6 @@ class Nodemailer implements INodemailer {
    async verifyEmail(enteredOTP: string, email: string): Promise<boolean> {
     try {
       const expectedOTP = this.otps.get(email);
-      
       if (expectedOTP === enteredOTP) {
         this.startWorkOtp.delete(email);
         return true;

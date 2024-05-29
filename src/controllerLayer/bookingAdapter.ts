@@ -1,4 +1,3 @@
-
 import { Next, Req, Res } from "../infrastructureLayer/types/expressTypes";
 import { BookingUseCase } from "../usecaseLayer/usecase/bookingUseCase";
 
@@ -16,47 +15,50 @@ export class BookingAdapter {
     try {
       const newOrder = await this.bookingusecase.bookService(req.body);
       newOrder &&
-      res.status(newOrder.status).json({
-        success: newOrder.success,
-        message: newOrder.message,
-        data:newOrder.data
-      });
+        res.status(newOrder.status).json({
+          success: newOrder.success,
+          message: newOrder.message,
+          data: newOrder.data,
+        });
     } catch (err) {
       next(err);
     }
   }
-
 
   // @desc    Get bookings
   //route     GET api/user/getBookings
   //@access   Private
   async getBookings(req: Req, res: Res, next: Next) {
-    console.log('adapter for get bookings');
-    
+    console.log("adapter for get bookings");
+
     try {
       const userId = req.query.userId as string;
       const status = req.query.status as string;
-      const workerId = req.query.workerId as string
-      const service = req.query.service as string
-      const bookings = await this.bookingusecase.getBookings({userId,status,workerId,service});
-      bookings &&
-      res.status(bookings.status).json({
-        success: bookings.success,
-        message: bookings.message,
-        data : bookings.data
+      const workerId = req.query.workerId as string;
+      const service = req.query.service as string;
+      const bookings = await this.bookingusecase.getBookings({
+        userId,
+        status,
+        workerId,
+        service,
       });
+      bookings &&
+        res.status(bookings.status).json({
+          success: bookings.success,
+          message: bookings.message,
+          data: bookings.data,
+        });
     } catch (err) {
       next(err);
     }
   }
 
-
-     // @desc Commit new Work
+  // @desc Commit new Work
   //route     PATCH /api/worker/commitWork
   //@access   Private
   async commitWork(req: Req, res: Res, next: Next) {
     try {
-      const user = await this.bookingusecase.commitWork(req.body)
+      const user = await this.bookingusecase.commitWork(req.body);
       user &&
         res.status(user.status).json({
           success: user.success,
@@ -68,8 +70,7 @@ export class BookingAdapter {
     }
   }
 
-
-   // @desc  Checking the otp valid or not
+  // @desc  Checking the otp valid or not
   //route     POST api/user/generateBill
   //@access   Public
   async addPayment(req: Req, res: Res, next: Next) {
@@ -86,57 +87,55 @@ export class BookingAdapter {
     }
   }
 
-   // @desc    Pay for the service
+  // @desc    Pay for the service
   // @route   POST /api/user/payment
   // @access  Private
   async payment(req: Req, res: Res, next: Next) {
     try {
-        console.log('entered')
-        const payment = await this.bookingusecase.createPayment(req.body)
-        // console.log('the payment status in controller is :', payment)
-        res.status(payment.status).json({
-            data: payment.data,
-
-        })
+      console.log("entered");
+      const payment = await this.bookingusecase.createPayment(req.body);
+      // console.log('the payment status in controller is :', payment)
+      res.status(payment.status).json({
+        data: payment.data,
+      });
     } catch (err) {
-        // console.log('the payment controller error is ', error)
-        next(err)
+      // console.log('the payment controller error is ', error)
+      next(err);
     }
-}
-
+  }
 
   // @desc    Pay for the service
   // @route   POST /api/user/webhook
   // @access  Private
-async webhook(req: Req, res: Res, next: Next) {
-  try {
+  async webhook(req: Req, res: Res, next: Next) {
+    try {
       // Parse the incoming webhook event
       const event = req.body;
       // Check the type of event
       switch (event.type) {
-          case 'checkout.session.completed':
-              // Handle charge succeeded event
-              const session = event.data.object;
-              const metadata = session.metadata;
-              const bookingId = metadata.bookingId;
-              const workerId = metadata.workerId;
-              const amount = metadata.amount
-              // console.log('the session is :', session)
-              const transactionId = event.data.object.payment_intent;
-              // console.log('The transaction id is :', transactionId);
-              await this.bookingusecase.paymentConfirmation({ transactionId, bookingId ,workerId,amount})
-              break;
-          default:
-              console.log(`Unhandled event type: ${event.type}`);
+        case "checkout.session.completed":
+          // Handle charge succeeded event
+          const session = event.data.object;
+          const metadata = session.metadata;
+          const bookingId = metadata.bookingId;
+          const workerId = metadata.workerId;
+          const amount = metadata.amount;
+          const transactionId = event.data.object.payment_intent;
+          await this.bookingusecase.paymentConfirmation({
+            transactionId,
+            bookingId,
+            workerId,
+            amount,
+          });
+          break;
+        default:
+          console.log(`Unhandled event type: ${event.type}`);
       }
-     
+
       // Respond with a success message
       res.status(200).json({ received: true });
-  } catch (error) {
+    } catch (error) {
       next(error);
+    }
   }
-}
-
-
-
 }

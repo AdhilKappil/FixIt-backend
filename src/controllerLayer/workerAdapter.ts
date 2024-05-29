@@ -105,18 +105,19 @@ export class WorkerAdapter {
 
 
 
-  // @desc    Logout user / clear cookie
-  // @route   POST /api/user/logout
+  // @desc    Logout worker / clear cookie
+  // @route   POST /api/worker/logout
   // @access  Public
-//   async logoutUser(req: Req, res: Res, next:Next) {
-//     try {
-//       res.cookie("jwt", "", {
-//         httpOnly: true,
-//         expires: new Date(0),
-//       });
-//       res.status(200).json({ message: "Logged out successfully" });
-//     } catch (err) {
-//       next(err)
-//     }
-//   }
+  async logoutWorker(req: Req, res: Res, next:Next) {
+    try {
+      res.cookie("workerjwt", "", {
+        httpOnly: true,
+        expires: new Date(0),
+      });
+      res.status(200).json({ message: "Logged out successfully" });
+    } catch (err) {
+      next(err)
+    }
+  }
+
 }

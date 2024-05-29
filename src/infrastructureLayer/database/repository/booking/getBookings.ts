@@ -33,7 +33,7 @@ export const getBokkings = async (
 
     if(!workerId && !userId && !service){
       if(status === "all"){
-        const booking = await bookingModel.find({status: { $ne: "cancelled" } });
+        const booking = await bookingModel.find({status: { $ne: "cancelled" } }).sort({createdAt:-1});
         return {
             status: 200,
             success: true,

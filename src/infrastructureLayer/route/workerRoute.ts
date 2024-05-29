@@ -62,12 +62,12 @@ router.post("/generateBill",AuthMiddleware.protectWorker,
   bookingAdapter.addPayment(req, res, next)
 );
 
-// // Route for user logout
-// router.post(
-//   "/logout",
-//   (req: Request, res: Response, next: NextFunction) =>
-//     userAdapter.logoutUser(req, res, next)
-// );
+// Route for worker logout
+router.post(
+  "/logout",
+  (req: Request, res: Response, next: NextFunction) =>
+    workerAdapter.logoutWorker(req, res, next)
+);
 
 
   

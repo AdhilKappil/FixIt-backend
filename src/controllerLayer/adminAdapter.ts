@@ -47,8 +47,7 @@ export class AdminAdapter {
     }
   }
 
-
-   // @desc    Block /Unblock the user
+  // @desc    Block /Unblock the user
   //route     PATCH /api/admin/users/unblock-block
   //@access   Private
   async blockUnblockUser(req: Req, res: Res, next: Next) {
@@ -66,12 +65,10 @@ export class AdminAdapter {
     }
   }
 
-
   // @desc  Get all join requests
   //route     Get /api/admin/getJoinRequests
   //@access   Private
   async getJoinRequests(req: Req, res: Res, next: Next) {
-    
     try {
       const user = await this.adminusecase.findAllRequests();
       user &&
@@ -83,7 +80,6 @@ export class AdminAdapter {
       next(err);
     }
   }
-
 
   // @desc    Accept or reject worker join request
   //route     PATCH /api/admin/worker/accept-rejectReques
@@ -102,8 +98,7 @@ export class AdminAdapter {
     }
   }
 
-
-   // @desc    Block /Unblock the user
+  // @desc    Block /Unblock the user
   //route     PATCH /api/admin/users/unblock-block
   //@access   Private
   async block_unBlockWorker(req: Req, res: Res, next: Next) {
@@ -121,6 +116,20 @@ export class AdminAdapter {
     }
   }
 
- 
+
+  // @desc    Logout worker / clear cookie
+  // @route   POST /api/worker/logout
+  // @access  Public
+  async logoutAdmin(req: Req, res: Res, next:Next) {
+    try {
+      res.cookie("adminjwt", "", {
+        httpOnly: true,
+        expires: new Date(0),
+      });
+      res.status(200).json({ message: "Logged out successfully" });
+    } catch (err) {
+      next(err)
+    }
+  }
 
 }

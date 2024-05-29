@@ -5,7 +5,7 @@ export class ChatAdapter {
   private readonly chatceusecase: ChatUseCase;
 
   constructor(chatceusecase: ChatUseCase) {
-    this.chatceusecase = chatceusecase; // using dependency injection to call the adminusecase
+    this.chatceusecase = chatceusecase; 
   }
 
   // @desc    Create conversation
@@ -43,7 +43,7 @@ export class ChatAdapter {
 
 
 
-     // @desc    Create conversation
+  // @desc    Create conversation
   //route     Post /api/chat/conversation
   //@access   Private
   async getMessage(req: Req, res: Res, next: Next) {
@@ -58,23 +58,5 @@ export class ChatAdapter {
       next(err);
     }
   }
-
-  //   // @desc    Create conversation
-  // //route     Post /api/chat/conversation
-  // //@access   Private
-  // async getConversation(req: Req, res: Res, next: Next) {
-  //   try {
-  //     const senderId = req.query.senderId as string;
-  //     const receiverId = req.query.receiverId as string;
-  //     const newConversation = await this.chatceusecase.getConversation({senderId,receiverId});
-  //     newConversation &&
-  //       res.status(200).json({
-  //         newConversation,
-  //       });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
-
 
 }

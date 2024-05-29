@@ -195,7 +195,7 @@ export class UserAdapter {
   // @access  Public
   async logoutUser(req: Req, res: Res, next:Next) {
     try {
-      res.cookie("jwt", "", {
+      res.cookie("userjwt", "", {
         httpOnly: true,
         expires: new Date(0),
       });
