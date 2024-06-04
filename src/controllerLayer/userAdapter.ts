@@ -38,10 +38,11 @@ export class UserAdapter {
   async loginUser(req: Req, res: Res, next: Next) {
     try {
       const user = await this.userusecase.loginUser(req.body);
+      console.log("token",user.token);
       user &&
         res.cookie("userjwt", user.token, {
           httpOnly: true,
-          sameSite: "strict", // Prevent CSRF attacks
+     
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         });
 
