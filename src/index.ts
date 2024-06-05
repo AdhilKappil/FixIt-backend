@@ -1,6 +1,6 @@
 
-import { httpServer } from "./infrastructureLayer/config/app"
-import connectDB from "./infrastructureLayer/config/db"
+import { httpServer } from "./infrastructure/config/app"
+import connectDB from "./infrastructure/config/db"
 import dotenv from 'dotenv';
 dotenv.config();
 
