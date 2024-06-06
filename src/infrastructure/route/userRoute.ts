@@ -85,7 +85,7 @@ router.get(
     bookingAdapter.getBookings(req, res, next)
 );
 
-// For commit work
+// For cancel booking
 router.patch(
   "/cancelBooking",
   AuthMiddleware.protectUser,

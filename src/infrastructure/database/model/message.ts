@@ -13,6 +13,9 @@ const messageSchema: Schema = new Schema<IMessage & Document>(
         text: {
           type: String,
         },
+        status: { 
+          type: Boolean, default: false
+         },
       },
       { timestamps: true }
 );

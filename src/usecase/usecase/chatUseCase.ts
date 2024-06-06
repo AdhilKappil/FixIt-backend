@@ -3,6 +3,7 @@ import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { createConversation } from "./chat/createConversation";
 import { createMessage } from "./chat/createMessage";
 import { getMessage } from "./chat/getMessage";
+import { viewMessages } from "./chat/viewMessages";
 
 
 export class ChatUseCase {
@@ -50,6 +51,19 @@ export class ChatUseCase {
       conversationId,
       senderId,
       text
+    );
+  }
+
+
+  //to create createMessage
+  async viewMessages({
+    _id
+  }: {
+    _id:string[]
+  }) {
+    return viewMessages(
+      this.chatRepository,
+      _id
     );
   }
 

@@ -7,6 +7,7 @@ import { createConversation } from "./chat/createConversation";
 import { createMessage } from "./chat/createMessage";
 import { findConversation } from "./chat/findConversation";
 import { getMessage } from "./chat/getMessage";
+import { viewMessages } from "./chat/viewMessages";
 
 // This class for exporting all the single DB operations togethor
 export class ChatRepository implements IChatRepository {
@@ -35,9 +36,17 @@ export class ChatRepository implements IChatRepository {
   async createMessage(newMessage: IMessage): Promise<IMessage> {
     return createMessage(newMessage, this.messageModel);
   }
+
   // get all message
   async getMessage(conversationId: string): Promise<MessageResponse | null> {
     return getMessage(conversationId, this.messageModel);
   }
+
+  // get all message
+  async viewMessages(_id: string[]): Promise<string> {
+    return viewMessages(_id, this.messageModel);
+  }
+
+
 
 }

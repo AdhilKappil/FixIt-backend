@@ -1,3 +1,4 @@
+import ErrorResponse from "../../../../usecase/handler/errorResponse";
 import BookingModel from "../../model/bookingModel";
 
 export const commitWork = async (
@@ -8,11 +9,14 @@ export const commitWork = async (
 ): Promise<string> => {
   try {
     const order = await bookingModel.findOne({_id})
+    if(order?.status === "commited"){
+      throw ErrorResponse.badRequest("The work has been already committed just a few seconds ago");
+    }
     if(order){
         if(status === "cancelled"){
           order.status = status
           await order.save()
-          return "Successfully cancelled the booking"
+          return "Successfully cancelled the work"
         }else{
           order.status = status
           order.workerId = workerId

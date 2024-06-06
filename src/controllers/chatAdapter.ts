@@ -59,4 +59,22 @@ export class ChatAdapter {
     }
   }
 
+   // @desc    Create message
+  //route     Post /api/chat/message
+  //@access   Private
+  async viewMessages(req: Req, res: Res, next: Next) {
+    try {
+      console.log("adapter");
+      console.log(req.body,"hello");
+      
+      const message = await this.chatceusecase.viewMessages(req.body);
+      message &&
+        res.status(200).json({
+          message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
 }
