@@ -3,6 +3,7 @@ import { IRequestValidator } from "../interface/repository/IvalidareRepository";
 import { createConversation } from "./chat/createConversation";
 import { createMessage } from "./chat/createMessage";
 import { getMessage } from "./chat/getMessage";
+import { getUnReadMessages } from "./chat/getUnReadMessages";
 import { viewMessages } from "./chat/viewMessages";
 
 
@@ -39,10 +40,12 @@ export class ChatUseCase {
   async createMessage({
     conversationId,
     senderId,
+    receiverId,
     text
   }: {
     conversationId:string
     senderId : string,
+    receiverId:string,
     text: string
   }) {
     return createMessage(
@@ -50,6 +53,7 @@ export class ChatUseCase {
       this.chatRepository,
       conversationId,
       senderId,
+      receiverId,
       text
     );
   }
@@ -75,6 +79,15 @@ export class ChatUseCase {
       this.requestValidator,
       this.chatRepository,
       conversationId
+    );
+  }
+
+  //to create service
+  async getUnReadMessages(id:string) {
+    return getUnReadMessages(
+      this.requestValidator,
+      this.chatRepository,
+      id
     );
   }
 

@@ -8,6 +8,6 @@ export interface IChatRepository {
     findConversation(senderId:string, receiverId:string): Promise<IConversationData | undefined>;
     createMessage(newMessage:IMessage): Promise<IMessage>;
     getMessage(conversationId:string): Promise<MessageResponse | null>;
-    getMessage(conversationId:string): Promise<MessageResponse | null>;
+    getUnReadMessages(id:string): Promise<MessageResponse | null>;
     viewMessages(_id:string[]): Promise<string>;
 }

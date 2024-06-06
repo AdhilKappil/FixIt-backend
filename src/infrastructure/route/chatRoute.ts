@@ -21,6 +21,11 @@ router.get("/message", (req: Request, res: Response, next: NextFunction) =>
 );
 
 // route for get all message
+router.get("/getUnReadMessages", (req: Request, res: Response, next: NextFunction) =>
+  chatAdapter.getUnReadMessages(req, res, next)
+);
+
+// route for get all message
 router.patch("/viewMessages", (req: Request, res: Response, next: NextFunction) =>
   chatAdapter.viewMessages(req, res, next)
 );

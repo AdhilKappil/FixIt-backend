@@ -26,8 +26,6 @@ class AuthMiddleware {
 
     console.log('User protect');
     token = req.cookies.userjwt;
-    console.log("jwt",token);
-    
     const userRepository = new UserRepository(UserModel);
 
     if (token) {

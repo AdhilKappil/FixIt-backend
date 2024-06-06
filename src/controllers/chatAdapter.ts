@@ -43,8 +43,8 @@ export class ChatAdapter {
 
 
 
-  // @desc    Create conversation
-  //route     Post /api/chat/conversation
+  // @desc    For get messages
+  //route     Post /api/chat/getMessage
   //@access   Private
   async getMessage(req: Req, res: Res, next: Next) {
     try {
@@ -59,8 +59,8 @@ export class ChatAdapter {
     }
   }
 
-   // @desc    Create message
-  //route     Post /api/chat/message
+   // @desc   Updated view message
+  //route     Post /api/chat/viewMessage
   //@access   Private
   async viewMessages(req: Req, res: Res, next: Next) {
     try {
@@ -71,6 +71,27 @@ export class ChatAdapter {
       message &&
         res.status(200).json({
           message,
+        });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+   // @desc    Create c
+  //route     Post /api/chat/conversation
+  //@access   Private
+  async getUnReadMessages(req: Req, res: Res, next: Next) {
+    try {
+      const id = req.query.id as string;
+      console.log(id);
+      
+      const message = await this.chatceusecase.getUnReadMessages(id);
+      console.log(message,"mess");
+      
+      message &&
+        res.status(200).json({
+          message
         });
     } catch (err) {
       next(err);

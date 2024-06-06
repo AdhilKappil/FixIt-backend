@@ -7,6 +7,7 @@ import { createConversation } from "./chat/createConversation";
 import { createMessage } from "./chat/createMessage";
 import { findConversation } from "./chat/findConversation";
 import { getMessage } from "./chat/getMessage";
+import { getUnReadMessages } from "./chat/getUnReadMessages";
 import { viewMessages } from "./chat/viewMessages";
 
 // This class for exporting all the single DB operations togethor
@@ -37,9 +38,14 @@ export class ChatRepository implements IChatRepository {
     return createMessage(newMessage, this.messageModel);
   }
 
-  // get all message
+  // get all messages
   async getMessage(conversationId: string): Promise<MessageResponse | null> {
     return getMessage(conversationId, this.messageModel);
+  }
+
+  // get all un read messages
+  async getUnReadMessages(id: string): Promise<MessageResponse | null> {
+    return getUnReadMessages(id, this.messageModel);
   }
 
   // get all message

@@ -10,6 +10,9 @@ const messageSchema: Schema = new Schema<IMessage & Document>(
         senderId: {
           type: String,
         },
+        receiverId: {
+          type: String,
+        },
         text: {
           type: String,
         },

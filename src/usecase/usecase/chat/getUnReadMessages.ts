@@ -1,28 +1,22 @@
-import { IMessage } from "../../../domain/message";
 import ErrorResponse from "../../handler/errorResponse";
 import { IChatRepository } from "../../interface/repository/IchatRepository";
 import { IRequestValidator } from "../../interface/repository/IvalidareRepository";
+import { MessageResponse } from "../../interface/services/Iresponse";
 
 
 // create new conversation
-export const createMessage = async (
+export const getUnReadMessages = async (
   requestValidator: IRequestValidator,
   chatRepository: IChatRepository,
-  conversationId:string,
-    senderId : string,
-    receiverId:string,
-    text: string
+  id:string
 
-): Promise<IMessage> => {
+): Promise<MessageResponse | null> => {
   try {
     // Validate required parameters
     const validation = requestValidator.validateRequiredFields(
-      { conversationId,senderId,receiverId, text},
+      {id},
       [
-        "conversationId",
-        "senderId",
-        "receiverId",
-        "text"
+        "id",
       ]
     );
 
@@ -30,18 +24,11 @@ export const createMessage = async (
       throw ErrorResponse.badRequest(validation.message as string);
     }
 
-    console.log(conversationId,'conversationid');
-    
-
-    const newMessage = {
-        conversationId,
-        senderId,
-        receiverId,
-        text
+    const message = await chatRepository.getUnReadMessages(id); 
+    if (message) {
+        return message
     }
-      const createNewMessage = await chatRepository.createMessage(newMessage);
-      return createNewMessage
- 
+    return null
   } catch (err) {
     throw err;
   }
