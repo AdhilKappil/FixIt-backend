@@ -8,6 +8,9 @@ export const addPayment = async (
   try {
     const order = await bookingModel.findOne({_id})
     if(order){
+      if(order.price && order.price>1){
+        return "You already generated the bill"
+      }
           order.price = price
           order.status = "completed"
           await order.save()
