@@ -29,8 +29,7 @@ export class BookingAdapter {
   //route     GET api/user/getBookings
   //@access   Private
   async getBookings(req: Req, res: Res, next: Next) {
-    console.log("adapter for get bookings");
-
+  
     try {
       const userId = req.query.userId as string;
       const status = req.query.status as string;
